@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TimingTask</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div>
+        <input id="btnAddTask" type="button" value="AddTask" />
+        <input id="btnStartTask" type="button" value="StartTask" />
+        <input id="btnStopTask" type="button" value="StopTask" />
+        <input id="btnRestartTask" type="button" value="RestartTask" />
+        <input id="btnRemove" type="button" value="RemoveTask" />
+        <input id="btnAddOne" type="button" value="AddOneTask" />
+    </div>
+    <div id="showArea"></div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#btnAddTask").click(function () {
+                $.ajax({
+                    url: '/Home/AddTask',
+                    success: function () {
+                        $("#showArea").html("AddTask Success");
+                    }
+                });
+            });
+
+            $("#btnStartTask").click(function () {
+                $.ajax({
+                    url: '/Home/Start',
+                    success: function () {
+                        $("#showArea").html("StartTask Success");
+                    }
+                });
+            });
+
+            $("#btnStopTask").click(function () {
+                $.ajax({
+                    url: '/Home/Stop',
+                    success: function () {
+                        $("#showArea").html("StopTask Success");
+                    }
+                });
+            });
+
+            $("#btnRestartTask").click(function () {
+                $.ajax({
+                    url: '/Home/Reset',
+                    success: function () {
+                        $("#showArea").html("RestartTask Success");
+                    }
+                });
+            });
+
+            $("#btnRemove").click(function () {
+                $.ajax({
+                    url: '/Home/Remove',
+                    success: function () {
+                        $("#showArea").html("RemoveTask Success");
+                    }
+                });
+            });
+            $("#btnAddOne").click(function () {
+                $.ajax({
+                    url: '/Home/AddOne',
+                    success: function () {
+                        $("#showArea").html("AddOne Success");
+                    }
+                });
+            });
+        })
+    </script>
+
+
+</body>
+</html>

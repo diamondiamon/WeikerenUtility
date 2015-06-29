@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weikeren.Utility.Cache</name>
+    </assembly>
+    <members>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.Add(System.String,System.Object,System.Int32)">
+            <summary>
+            添加数据到缓存
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.AddCacheDepend(System.String,System.Object,System.Int32,System.String[])">
+            <summary>
+            添加数据到缓存 (依赖其它缓存)
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+            <param name="dependKey">依赖缓存名称数组</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.AddFileDepend(System.String,System.Object,System.Int32,System.String[])">
+            <summary>
+            添加数据到缓存 (依赖文件)
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+            <param name="files">依赖缓存名称文件名数组</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.RemoveCache(System.String)">
+            <summary>
+            删除指定缓存
+            </summary>
+            <param name="objId"></param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.RemoveCacheAll">
+            <summary>
+            删除所有缓存
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.GetCacheData(System.String)">
+            <summary>
+            获得缓存数据
+            </summary>
+            <param name="objId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.ICacheStrategy.HasCache(System.String)">
+            <summary>
+            判断此缓存是否有效
+            </summary>
+            <param name="objID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfig.GetConfig">
+            <summary>
+            获取配置
+            </summary>
+            <param name="anConfig"></param>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.ServerList">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.PoolName">
+            <summary>
+            链接池名称
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.IntConnections">
+            <summary>
+            初始化链接数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.MinConnections">
+            <summary>
+            最少链接数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.MaxConnections">
+            <summary>
+            最大连接数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.SocketConnectTimeout">
+            <summary>
+            Socket链接超时时间
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.SocketTimeout">
+            <summary>
+            socket超时时间
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.MaintenanceSleep">
+            <summary>
+            维护线程休息时间
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.FailOver">
+            <summary>
+            链接失败后是否重启,详情参见http://baike.baidu.com/view/1084309.htm
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemCachedConfigInfo.Nagle">
+            <summary>
+            是否用nagle算法启动socket
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Cache.MemcachedContainer.MemcachedManager">
+            <summary>
+            MemCache管理操作类
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemcachedManager.ServerList">
+            <summary>
+            缓存服务器地址列表
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Cache.MemcachedContainer.MemcachedManager.CacheClient">
+            <summary>
+            客户端缓存操作对象
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.Add(System.String,System.Object,System.Int32)">
+            <summary>
+            添加数据到缓存
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.AddCacheDepend(System.String,System.Object,System.Int32,System.String[])">
+            <summary>
+            添加数据到缓存 (依赖其它缓存)
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+            <param name="dependKey">依赖缓存名称数组</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.AddFileDepend(System.String,System.Object,System.Int32,System.String[])">
+            <summary>
+            添加数据到缓存 (依赖文件)
+            </summary>
+            <param name="objId">缓存名称</param>
+            <param name="o">缓存内容</param>
+            <param name="second">缓存时间(秒)</param>
+            <param name="files">依赖缓存名称文件名数组</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.RemoveCache(System.String)">
+            <summary>
+            删除指定缓存
+            </summary>
+            <param name="objId"></param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.RemoveCacheAll">
+            <summary>
+            删除所有缓存
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.GetCacheData(System.String)">
+            <summary>
+            获得缓存数据
+            </summary>
+            <param name="objId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.MemcachedContainer.MemcachedStrategy.HasCache(System.String)">
+            <summary>
+            判断此缓存是否有效
+            </summary>
+            <param name="objID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Weikeren.Utility.Cache.SerializationHelper">
+            <summary>
+            SerializationHelper 的摘要说明。
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.SerializationHelper.Load(System.Type,System.String)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="type">对象类型</param>
+            <param name="filename">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.SerializationHelper.Save(System.Object,System.String)">
+            <summary>
+            序列化
+            </summary>
+            <param name="obj">对象</param>
+            <param name="filename">文件路径</param>
+        </member>
+        <member name="M:Weikeren.Utility.Cache.SerializationHelper.Serialize(System.Object)">
+            <summary>
+            xml序列化成字符串
+            </summary>
+            <param name="obj">对象</param>
+            <returns>xml字符串</returns>
+        </member>
+    </members>
+</doc>

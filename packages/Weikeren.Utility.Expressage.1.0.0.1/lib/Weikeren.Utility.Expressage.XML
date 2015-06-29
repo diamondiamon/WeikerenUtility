@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weikeren.Utility.Expressage</name>
+    </assembly>
+    <members>
+        <member name="T:Weikeren.Utility.Expressage.ExpressageFactory">
+            <summary>
+            快递工厂类
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Expressage.ExpressageFactory.CreateExpressageGetter">
+            <summary>
+            创建快递查询接口
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.ErrorMsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ErrorMsg.ErrorCode">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ErrorMsg.ErrorMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.ExpressageInfo">
+            <summary>
+            快递信息
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ExpressageInfo.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ExpressageInfo.Context">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.IExpressageGetter">
+            <summary>
+            快递信息获取器
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Expressage.IExpressageGetter.GetExpressageMessage(Weikeren.Utility.Expressage.MQueryParameter)">
+            <summary>
+            返回订单查询的json字符串
+            </summary>
+            <param name="para">查询对象[物流公司+快递单号]</param>
+            <returns>查询结果</returns>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.Kuaidi100ExpressageGetter">
+            <summary>
+            快递100
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Expressage.Kuaidi100ExpressageGetter.GetExpressageMessage(Weikeren.Utility.Expressage.MQueryParameter)">
+            <summary>
+            返回订单查询的json字符串
+            </summary>
+            <param name="para">查询对象[物流公司+快递单号]</param>
+            <returns>查询结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Expressage.Kuaidi100ExpressageGetter.getExpressageList">
+            <summary>
+            获取数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ExpressKeyMapping.Key">
+            <summary>
+            关键词
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.ExpressKeyMapping.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.MQueryParameter">
+            <summary>
+            查询参数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MQueryParameter.TypeCom">
+            <summary>
+            快递公司
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MQueryParameter.OrderId">
+            <summary>
+            快递订单号
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.MResultMsg">
+            <summary>
+            结果信息
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MResultMsg.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MResultMsg.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MResultMsg.JsonMessage">
+            <summary>
+            返回的JSON
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MResultMsg.Data">
+            <summary>
+            快递信息
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Expressage.MResultMsg.Error">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Expressage.StateType">
+            <summary>
+            快递状态
+            </summary>
+        </member>
+    </members>
+</doc>

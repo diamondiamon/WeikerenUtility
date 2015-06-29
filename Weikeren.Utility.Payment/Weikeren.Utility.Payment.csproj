@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A0C3324-E3A6-45C1-AFD5-9215305DD429}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Weikeren.Utility.Payment</RootNamespace>
+    <AssemblyName>Weikeren.Utility.Payment</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Weikeren.Utility.Payment.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="com.yeepay.icc">
+      <HintPath>..\packages\Yeepay\com.yeepay.icc.dll</HintPath>
+    </Reference>
+    <Reference Include="com.yeepay.utils">
+      <HintPath>..\packages\Yeepay\com.yeepay.utils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enum\CallbackWayEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enum\PayWayEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\AlipayBuyerRequestModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\AlipayBuyerReponseModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\AlipayDirectReponseModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\AlipayDirectRequestModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\BaseRequestModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\YeepayReponseModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\YeepayRequestModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayBuyerProcessor.cs" />
+    <Compile Include="PayProcessor\AlipayHelper\AlipayConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\AlipayCore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\AlipayDeliverHelper.cs" />
+    <Compile Include="PayProcessor\AlipayHelper\AlipayNotify.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\AlipaySubmit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\FakeHttpContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\MD5.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayHelper\RemotePost.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\AlipayDirectProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\IPaymentProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\PayProcessorFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PayProcessor\YeepayProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config.transform" />
+    <None Include="Web.config.transform" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

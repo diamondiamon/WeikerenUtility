@@ -1,0 +1,1663 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weikeren.Utility.Payment</name>
+    </assembly>
+    <members>
+        <member name="T:Weikeren.Utility.Payment.Enum.CallbackWayEnum">
+            <summary>
+            Callback方式
+            </summary>
+        </member>
+        <member name="F:Weikeren.Utility.Payment.Enum.CallbackWayEnum.Page">
+            <summary>
+            页面方式
+            </summary>
+        </member>
+        <member name="F:Weikeren.Utility.Payment.Enum.CallbackWayEnum.Notify">
+            <summary>
+            通知方式
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Enum.PayWayEnum">
+            <summary>
+            支付方式 
+            </summary>
+        </member>
+        <member name="F:Weikeren.Utility.Payment.Enum.PayWayEnum.Alipay">
+            <summary>
+            支付宝
+            </summary>
+        </member>
+        <member name="F:Weikeren.Utility.Payment.Enum.PayWayEnum.Yeepay">
+            <summary>
+            易宝支付
+            </summary>
+        </member>
+        <member name="F:Weikeren.Utility.Payment.Enum.PayWayEnum.Zhifu">
+            <summary>
+            直付
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Enum.EnumExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Enum.EnumExtension.ToClassName(Weikeren.Utility.Payment.Enum.PayWayEnum)">
+            <summary>
+            
+            </summary>
+            <param name="way"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.AlipayReponseModel">
+            <summary>
+            支付宝返回数据模型
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.BaseReponseModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseReponseModel.ToPayReponseModel">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.AlipayReponseModel.ToPayReponseModel">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.is_success">
+            <summary>
+            成功标识
+            <remarks>
+            表示接口调用是否成功，并不表明业务处理结果 T|F
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.sign_type">
+            <summary>
+            签名方式
+            <remarks>
+            DSA、RSA、MD5三个值可选，必须大写。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.sign">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.out_trade_no">
+            <summary>
+            商户网站唯一订单号
+            <remarks>
+            对应商户网站的订单系统中的唯一订单号，非支付宝交易号。需保证在商户网站中的唯一性。是请求时对应的参数，原样返回。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.subject">
+            <summary>
+            商品名称
+            <remarks>
+            商品的标题/交易标题/订单标题/订单关键字等。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.payment_type">
+            <summary>
+            支付类型
+            <remarks>
+            对应请求时的payment_type参数，原样返回。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.exterface">
+            <summary>
+            接口名称
+            <remarks>
+            标志调用哪个接口返回的链接。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.trade_no">
+            <summary>
+            支付宝交易号
+            <remarks>
+            该交易在支付宝系统中的交易流水号。最短16位，最长64位。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.trade_status">
+            <summary>
+            交易状态
+            <remarks>
+            交易目前所处的状态。成功状态的值只有两个：TRADE_FINISHED（普通即时到账的交易成功状态）TRADE_SUCCESS（开通了高级即时到账或机票分销产品后的支付成功状态）
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.notify_id">
+            <summary>
+            通知校验ID
+            <remarks>
+            支付宝通知校验ID，商户可以用这个流水号询问支付宝该条通知的合法性
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.notify_type">
+            <summary>
+            通知类型
+            <remarks>
+            返回通知类型。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.notify_time">
+            <summary>
+            通知时间
+            <remarks>
+            通知时间（支付宝时间）。格式为yyyy-MM-dd HH:mm:ss。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.seller_email">
+            <summary>
+            卖家支付宝账号
+            <remarks>
+            卖家支付宝账号，可以是Email或手机号码
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.buyer_email">
+            <summary>
+            买家支付宝账号
+            <remarks>
+            买家支付宝账号，可以是Email或手机号码。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.seller_id">
+            <summary>
+            卖家支付宝账户号
+            <remarks>
+            卖家支付宝账号对应的支付宝唯一用户号
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.buyer_id">
+            <summary>
+            买家支付宝账户号
+            <remarks>
+            买家支付宝账号对应的支付宝唯一用户号
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.total_fee">
+            <summary>
+            交易金额
+            <remarks>
+            该笔订单的资金总额，单位为RMB-Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.body">
+            <summary>
+            商品描述
+            <remarks>
+            对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.bank_seq_no">
+            <summary>
+            网银流水
+            <remarks>
+            网银流水号。只有开通了纯网关和伪网关的商户，才返回该参数
+            </remarks>
+            </summary>
+        </member>
+        <!-- 对于成员“P:Weikeren.Utility.Payment.Models.AlipayReponseModel.extra_common_param”忽略有格式错误的 XML 注释 -->
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.ReceivedArgs">
+            <summary>
+            支付网关返回参数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayReponseModel.CallbackWay">
+            <summary>
+            Callback方式
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.AlipayRequestModel">
+            <summary>
+            支付宝支付请求参数模型
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.BaseRequestModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseRequestModel.PostProcessPayment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseRequestModel.GetMD5(System.String,System.String)">
+            <summary>
+            Gets MD5 hash
+            </summary>
+            <param name="Input">Input</param>
+            <param name="Input_charset">Input charset</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseRequestModel.BubbleSort(System.String[])">
+            <summary>
+            Bubble sort
+            </summary>
+            <param name="Input">Input</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseRequestModel.CreatUrl(System.String[],System.String,System.String)">
+            <summary>
+            Create URL
+            </summary>
+            <param name="Para">Para</param>
+            <param name="InputCharset">Input charset</param>
+            <param name="Key">Key</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.BaseRequestModel.Get_Http(System.String,System.Int32)">
+            <summary>
+            Gets HTTP
+            </summary>
+            <param name="StrUrl">Url</param>
+            <param name="Timeout">Timeout</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.AlipayRequestModel.PostProcessPayment">
+            <summary>
+            提交请求
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.AlipayRequestModel.ConvertBankCode(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="bankCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.service">
+            <summary>
+            接口名称[必填]
+            <remarks>
+            默认：create_direct_pay_by_user
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.partner">
+            <summary>
+            合作者身份ID[必填]
+            <remarks>
+            签约的支付宝账号对应的支付宝唯一用户号。以2088开头的16位纯数字组成。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.key">
+            <summary>
+            合作者身份Key[必填]
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.input_charset">
+            <summary>
+            参数编码字符集[必填]
+            <remarks>
+            商户网站使用的编码格式，如utf-8、gbk、gb2312等。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.sign_type">
+            <summary>
+            签名方式[必填]
+            <remarks>
+            DSA、RSA、MD5三个值可选，必须大写。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.sign">
+            <summary>
+            签名[必填]
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.notify_url">
+            <summary>
+            服务器异步通知页面路径
+            <remarks>
+            支付宝服务器主动通知商户网站里指定的页面http路径。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.return_url">
+            <summary>
+            页面跳转同步通知页面路径
+            <remarks>
+            支付宝处理完请求后，当前页面自动跳转到商户网站里指定页面的http路径。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.error_notify_url">
+            <summary>
+            请求出错时的通知页面路径
+            <remarks>
+            当商户通过该接口发起请求时，如果出现提示报错，支付宝会根据“11.10 item_orders_info出错时的通知错误码”和“11.11 请求出错时的通知错误码”通过异步的方式发送通知给商户。该功能需要联系支付宝开通。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.out_trade_no">
+            <summary>
+            商户网站唯一订单号[必填]
+            <remarks>
+            支付宝合作商户网站唯一订单号（确保在商户系统中唯一）
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.subject">
+            <summary>
+            商品名称[必填]
+            <remarks>
+            商品的标题/交易标题/订单标题/订单关键字等。该参数最长为128个汉字。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.payment_type">
+            <summary>
+            支付类型[必填]
+            <remarks>
+            默认值为：1（商品购买）
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.defaultbank">
+            <summary>
+            默认网银[必填]
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.seller_email">
+            <summary>
+            卖家支付宝账号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.seller_id">
+            <summary>
+            卖家支付宝账户号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.seller_account_name">
+            <summary>
+            卖家别名支付宝账号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.price">
+            <summary>
+            商品单价
+            <remarks>
+            单位为：RMB Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.total_fee">
+            <summary>
+            交易金额
+            <remarks>
+            该笔订单的资金总额，单位为RMB-Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.quantity">
+            <summary>
+            交易金额
+            <remarks>
+            该笔订单的资金总额，单位为RMB-Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.body">
+            <summary>
+            商品描述
+            <remarks>
+            对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.show_url">
+            <summary>
+            商品展示网址
+            <remarks>
+            收银台页面上，商品展示的超链接。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.paymethod">
+            <summary>
+            默认支付方式
+            <remarks>
+            若要使用纯网关，取值必须是bankPay（网银支付）。如果不设置，默认为directPay（余额支付）。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.need_ctu_check">
+            <summary>
+            网银支付时是否做CTU校验
+            <remarks>
+            商户在配置了支持CTU（支付宝风险稽查系统）校验权限的前提下，可以选择本次交易是否需要经过CTU校验。Y：做CTU校验；N：不做CTU校验
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.royalty_type">
+            <summary>
+            提成类型
+            <remarks>
+            目前只支持一种类型：10（卖家给第三方提成）。当传递了参数royalty_parameters时，提成类型参数不能为空
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.royalty_parameters">
+            <summary>
+            分润账号集
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.anti_phishing_key">
+            <summary>
+            防钓鱼时间戳
+            <remarks>
+            通过时间戳查询接口获取的加密支付宝系统时间戳。如果已申请开通防钓鱼时间戳验证，则此字段必填
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.exter_invoke_ip">
+            <summary>
+            客户端IP
+            <remarks>
+            用户在创建交易时，该用户当前所使用机器的IP。如果商户申请后台开通防钓鱼选项，此字段必填，校验用
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.extra_common_param">
+            <summary>
+            公用回传参数
+            <remarks>
+            如果用户请求时传递了该参数，则返回给商户时会回传该参数
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.extend_param">
+            <summary>
+            公用业务扩展参数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.it_b_pay">
+            <summary>
+            超时时间,默认：1h
+            <remarks>
+            设置未付款交易的超时时间，一旦超时，该笔交易就会自动被关闭。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。该参数数值不接受小数点，如1.5h，可转换为90m。该功能需要联系支付宝配置关闭时间
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.AlipayRequestModel.product_type">
+            <summary>
+            商户申请的产品类型
+            <remarks>
+            用于针对不同的产品，采取不同的计费策略。如果开通了航旅垂直搜索平台产品，请填写CHANNEL_FAST_PAY；如果没有，则为空。
+            </remarks>
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.PayReponseModel">
+            <summary>
+            返回数据模型
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.OrderNo">
+            <summary>
+            交易号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.Money">
+            <summary>
+            金额
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.BankCode">
+            <summary>
+            银行代号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.PaySSN">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.ReceivedArgs">
+            <summary>
+            收到的参数
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.Remark">
+            <summary>
+            标记，发送到银行后，银行会以原文发回来，（注意编码问题）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.PaidDate">
+            <summary>
+            支付时间
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.PayWay">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayReponseModel.Source">
+            <summary>
+            返回数据源，ZhiFuResponseModel | YeepayReponseModel | AlipayReponseModel
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.OrderNo">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.Money">
+            <summary>
+            金额
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.BankCode">
+            <summary>
+            银行代号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.Charset">
+            <summary>
+            页面编码
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.PartnerId">
+            <summary>
+            商家ID （一连串数字）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.PartnerKey">
+            <summary>
+            商家Key（一连串字符）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.MerchantName">
+            <summary>
+            商家名称,支付宝为seller_email，用支付宝时必填
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.PostUrl">
+            <summary>
+            提交地址
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.ReturnCallbackUrl">
+            <summary>
+            重定向形式返回的页面
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.NotifyCallbackUrl">
+            <summary>
+            服务器点对点返回的页面
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.ProductName">
+            <summary>
+            产品名称（注意编码问题）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.ProductDesc">
+            <summary>
+            产品描述（注意编码问题）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.PayRequestModel.Remark">
+            <summary>
+            标记，发送到银行后，银行会以原文发回来，（注意编码问题）
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.YeepayReponseModel">
+            <summary>
+            易宝返回数据模型
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.YeepayReponseModel.ToPayReponseModel">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.p1_MerId">
+            <summary>
+            商户编号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r0_Cmd">
+            <summary>
+            业务类型
+            <remarks>固定值 ”Buy”.</remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r1_Code">
+            <summary>
+            支付结果
+            <remarks>固定值 “1”, 代表支付成功.</remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r2_TrxId">
+            <summary>
+            易宝支付交易流水号
+            <remarks>
+            易宝支付平台产生的交易流水号，每笔订单唯一
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r3_Amt">
+            <summary>
+            支付金额
+            单位:元，精确到分.此参数为空则无法直连(如直连会报错：抱歉，交易金额太小。),必须到易宝网关让消费者输入金额
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r4_Cur">
+            <summary>
+            交易币种
+            返回时是"RMB"
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r5_Pid">
+            <summary>
+            商品名称
+            <remarks>
+            易宝支付返回商户设置的商品名称. 此参数如用到中文，请注意转码
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r6_Order">
+            <summary>
+            商户订单号
+            <remarks>
+            易宝支付返回商户订单号.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r7_Uid">
+            <summary>
+            易宝支付会员ID
+            <remarks>
+            如果用户使用的易宝支付会员进行支付则返回该用户的易宝支付会员ID;反之为””.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r8_MP">
+            <summary>
+            商户扩展信息
+            <remarks>
+            此参数如用到中文，请注意转码.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.r9_BType">
+            <summary>
+            交易结果返回类型
+            <remarks>
+            为“1”: 浏览器重定向;为“2”: 服务器点对点通讯.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.rb_BankId">
+            <summary>
+            支付通道编码
+            <remarks>
+            返回用户所使用的支付通道编码.该返回参数不参与到hmac校验，范例中没有收录，可根据您的需要自行添加.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.ro_BankOrderId">
+            <summary>
+            银行订单号
+            <remarks>
+            该返回参数不参与到hmac校验，范例中没有收录，可根据您的需要自行添加
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.rp_PayDate">
+            <summary>
+            支付成功时间
+            <remarks>
+            该返回参数不参与到hmac校验，范例中没有收录，可根据您的需要自行添加.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.rq_CardNo">
+            <summary>
+            神州行充值卡序列号
+            <remarks>
+            若用户使用神州行卡支付，返回用户所使用的神州行卡序列号. 该返回参数不参与到hmac校验，范例中没有收录，可根据您的需要自行添加
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.ru_Trxtime">
+            <summary>
+            交易结果通知时间
+            <remarks>
+            该返回参数不参与到hmac校验，范例中没有收录，可根据您的需要自行添加.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayReponseModel.hmac">
+            <summary>
+            签名数据
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.YeepayRequestModel">
+            <summary>
+            易宝支付请求参数模型
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.YeepayRequestModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.YeepayRequestModel.PostProcessPayment">
+            <summary>
+            提交请求
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p0_Cmd">
+            <summary>
+            业务类型[必填]
+            固定值“Buy”
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p1_MerId">
+            <summary>
+            商户编号[必填]
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p2_Order">
+            <summary>
+            商户订单号
+            若不为””，提交的订单号必须在自身账户交易中唯一;为 ””时，易宝支付会自动生成随机的商户订单号.易宝支付系统中对于已付或者撤销的订单，商户端不能重复提交。
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p3_Amt">
+            <summary>
+            支付金额
+            单位:元，精确到分.此参数为空则无法直连(如直连会报错：抱歉，交易金额太小。),必须到易宝网关让消费者输入金额
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p4_Cur">
+            <summary>
+            交易币种[必填]
+            固定值 ”CNY”.
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p5_Pid">
+            <summary>
+            商品名称
+            <remarks>
+            用于支付时显示在易宝支付网关左侧的订单产品信息,此参数如用到中文，请注意转码
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p6_Pcat">
+            <summary>
+            商品种类
+            <remarks>
+            商品种类.此参数如用到中文，请注意转码
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p7_Pdesc">
+            <summary>
+            商品描述
+            <remarks>
+            商品描述.此参数如用到中文，请注意转码
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p8_Url">
+            <summary>
+            商户接收支付成功数据的地址
+            <remarks>
+            支付成功后易宝支付会向该地址发送两次成功通知，该地址可以带参数，如:“ www.yeepay.com/callback.action?test=test”.注意：如不填p8_Url的参数值支付成功后您将得不到支付成功的通知。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.p9_SAF">
+            <summary>
+            送货地址
+            <remarks>
+            为“1”: 需要用户将送货地址留在易宝支付系统;为“0”: 不需要，默认为 ”0”.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.pa_MP">
+            <summary>
+            商户扩展信息
+            <remarks>
+            返回时原样返回，此参数如用到中文，请注意转码.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.pd_FrpId">
+            <summary>
+            支付通道编码
+            <remarks>
+            该字段可依照附录:支付通道编码列表 设置参数值.如果此值设置错误则会报"error.noAvaliableFrp"错误
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.pr_NeedResponse">
+            <summary>
+            应答机制
+            <remarks>
+            固定值为“1”: 需要应答机制; 收到易宝支付服务器点对点支付成功通知，必须回写以”success”（无关大小写）开头的字符串，即使您收到成功通知时发现该订单已经处理过，也要正确回写”success”，否则易宝支付将认为您的系统没有收到通知，启动重发机制，直到收到”success”为止。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.hmac">
+            <summary>
+            签名数据
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.YeepayRequestModel.input_charset">
+            <summary>
+            字符集
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.ZhiFuRequestModel">
+            <summary>
+            直付支付请求参数模型
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.ConvertBankCode(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="bankCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.PostProcessPayment">
+            <summary>
+            提交请求
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.char_set">
+            <summary>
+            字符集,
+            只能取以下枚举值
+            00-GBK
+            01-GB2312
+            02-UTF-8
+            默认00-GBK
+            (可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.page_return_url">
+            <summary>
+            页面返回url，
+            交易结果通过页面跳转通知到这个url
+            (不可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.offline_notify_url">
+            <summary>
+            后台通知url，
+            交易结果通过后台通讯通知到这个url
+            (不可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.biz_type">
+            <summary>
+            业务类型，
+            DirectPayment:直付，GWDirectPay：银行支付
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.version_no">
+            <summary>
+            接口版本，
+            1.0（不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.sign_type">
+            <summary>
+            签名方式，
+            MD5或RSA
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.client_ip">
+            <summary>
+            客户IP，
+            用户浏览器IP地址，用于防钓鱼控制
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.order_date">
+            <summary>
+            订单日期，
+            商户发起请求的日期;格式：YYYYMMDD
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.bank_abbr">
+            <summary>
+            银行代码
+            用户选择的银行所对应的英文代号，详细信息请见后面的银行代码对照表
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.card_type">
+            <summary>
+            银行卡种类，
+            1-借记卡; 2-信用卡
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.partner_id">
+            <summary>
+            合作商户编号，
+            直付给合作商户分配的唯一标识
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.partner_name">
+            <summary>
+            合作商户展示名称，
+            商户展示名称
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.partner_ac_date">
+            <summary>
+            合作商户会计日期，
+            商户发起请求的会计日期;格式：YYYYMMDD
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.request_id">
+            <summary>
+            请求号，
+            合作商户请求的流水号，每次请求保持唯一
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.order_id">
+            <summary>
+            订单号，
+            商户的订单号，商户系统保证唯一
+             （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.Money">
+            <summary>
+            金额，
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.total_amount">
+            <summary>
+            订单总金额，
+            订单金额，以分为单位，如1元表示为100
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.refund_amount">
+            <summary>
+            退款金额,退款金额，以分为单位
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.show_url">
+            <summary>
+            商品展示url，
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.purchaser_id">
+            <summary>
+            购买者标识，
+            待支付的手机号或者直付账户昵称
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.product_name">
+            <summary>
+            商品名称，
+            所购买商品的名称
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.product_desc">
+            <summary>
+            商品描述，
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.attach_param">
+            <summary>
+            原样返回的商户数据，
+            交易返回时原样返回给商户网站，给商户备用
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.valid_unit">
+            <summary>
+            订单有效期单位，
+            只能取以下枚举值 00-分 01-小时 02-日 03-月
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.valid_num">
+            <summary>
+            订单有效期数量，
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.merchant_cert">
+            <summary>
+            商户证书公钥，
+            不参与签名；如果signType=RSA，此项必输
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.signKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.mac">
+            <summary>
+            签名值，
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.input_charset">
+            <summary>
+            参数编码字符集[必填]
+            <remarks>
+            商户网站使用的编码格式，如utf-8、gbk、gb2312等。
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuRequestModel.post_Url">
+            <summary>
+            提交地址
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.Models.ZhiFuResponseModel">
+            <summary>
+            直付返回结果
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.ToPayReponseModel">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.status">
+            <summary>
+            支付结果,
+            支付结果状态:SUCCESS,FAILED
+            (不可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.message_code">
+            <summary>
+            返回码，
+            000000-成功。其他信息提示码，提示各类相关失败信息
+            (不可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.message_desc">
+            <summary>
+            返回码描述信息
+            (可空)
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.sign_type">
+            <summary>
+            签名方式，
+            MD5或RSA
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.biz_type">
+            <summary>
+            业务类型，
+            PageResult:支付结果页面通知(即时到账)，OfflineResult：支付结果后台通知(即时到账)
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.version_no">
+            <summary>
+            接口版本，
+            1.0（不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.partner_id">
+            <summary>
+            合作商户编号，
+            直付给合作商户分配的唯一标识
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.pay_no">
+            <summary>
+            流水号,
+            直付系统返回的交易流水号
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.Money">
+            <summary>
+            支付金额，以元为单位
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.total_amount">
+            <summary>
+            支付金额,
+            实际支付的金额，以分为单位
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.bank_abbr">
+            <summary>
+            支付银行,
+            用户使用哪个银行进行支付的。详细信息请见后面的银行代码对照表
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.purchaser_id">
+            <summary>
+            支付手机号
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.order_id">
+            <summary>
+            商户订单号,
+            商户系统的订单号
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.order_date">
+            <summary>
+            订单提交日期,
+            商户发起请求的日期：格式：YYYYMMDD
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.pay_date">
+            <summary>
+            支付时间,用户完成支付的时间,格式：YYYYMMDDHHmmss
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.ac_date">
+            <summary>
+            会计日期,
+            直付系统会计日期，格式：YYYYMMDDHHmmss
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.attach_param">
+            <summary>
+            原样返回的商户数据,
+            交易返回时原样返回给商户网站，给商户备用
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.fee">
+            <summary>
+            费用,单位为分
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.server_cert">
+            <summary>
+            服务器公钥证书,
+            不参与签名；如果signType=RSA，此项必输
+            （可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.mac">
+            <summary>
+            签名数据，
+            以上请求参数生成的签名串,获得mac的方法见签名算法,参数顺序按照表格中从上到下的顺序,但不包括本参数.
+            （不可空）
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.Models.ZhiFuResponseModel.ReceivedArgs">
+            <summary>
+            支付网关返回参数
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Config">
+            <summary>
+            类名：Config
+            功能：基础配置类
+            详细：设置帐户有关信息及返回路径
+            版本：3.3
+            日期：2012-07-05
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            
+            如何获取安全校验码和合作身份者ID
+            1.用您的签约支付宝账号登录支付宝网站(www.alipay.com)
+            2.点击“商家服务”(https://b.alipay.com/order/myOrder.htm)
+            3.点击“查询合作者身份(PID)”、“查询安全校验码(Key)”
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Config.Partner">
+            <summary>
+            获取或设置合作者身份ID
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Config.Key">
+            <summary>
+            获取或设交易安全校验码
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Config.Input_charset">
+            <summary>
+            获取字符编码格式
+            </summary>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Config.Sign_type">
+            <summary>
+            获取签名方式
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core">
+            <summary>
+            类名：Core
+            功能：支付宝接口公用函数类
+            详细：该类是请求、通知返回两个文件所调用的公用函数核心处理文件，不需要修改
+            版本：3.3
+            修改日期：2012-07-05
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.FilterPara(System.Collections.Generic.SortedDictionary{System.String,System.String})">
+            <summary>
+            除去数组中的空值和签名参数并以字母a到z的顺序排序
+            </summary>
+            <param name="dicArrayPre">过滤前的参数组</param>
+            <returns>过滤后的参数组</returns>
+        </member>
+        <!-- 对于成员“M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.CreateLinkString(System.Collections.Generic.Dictionary{System.String,System.String})”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.CreateLinkStringUrlencode(System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding)”忽略有格式错误的 XML 注释 -->
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.LogResult(System.String)">
+            <summary>
+            写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
+            </summary>
+            <param name="sWord">要写入日志里的文本内容</param>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.GetAbstractToMD5(System.IO.Stream)">
+            <summary>
+            获取文件的md5摘要
+            </summary>
+            <param name="sFile">文件流</param>
+            <returns>MD5摘要结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Core.GetAbstractToMD5(System.Byte[])">
+            <summary>
+            获取文件的md5摘要
+            </summary>
+            <param name="dataFile">文件流</param>
+            <returns>MD5摘要结果</returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify">
+            <summary>
+            类名：Notify
+            功能：支付宝通知处理类
+            详细：处理支付宝各接口通知返回
+            版本：3.3
+            修改日期：2011-07-05
+            '说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            
+            //////////////////////注意/////////////////////////////
+            调试通知返回时，可查看或改写log日志的写入TXT里的数据，来检查通知返回是否正常 
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.#ctor">
+            <summary>
+            构造函数
+            从配置文件中初始化变量
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <param name="notify_id">通知验证ID</param>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.Verify(System.Collections.Generic.SortedDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+             验证消息是否是支付宝发出的合法消息
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <param name="notify_id">通知验证ID</param>
+            <param name="sign">支付宝生成的签名结果</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.GetPreSignStr(System.Collections.Generic.SortedDictionary{System.String,System.String})">
+            <summary>
+            获取待签名字符串（调试用）
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <returns>待签名字符串</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.GetSignVeryfy(System.Collections.Generic.SortedDictionary{System.String,System.String},System.String)">
+            <summary>
+            获取返回时的签名验证结果
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <param name="sign">对比的签名结果</param>
+            <returns>签名验证结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.GetResponseTxt(System.String)">
+            <summary>
+            获取是否是支付宝服务器发来的请求的验证结果
+            </summary>
+            <param name="notify_id">通知验证ID</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayNotify.Get_Http(System.String,System.Int32)">
+            <summary>
+            获取远程服务器ATN结果
+            </summary>
+            <param name="strUrl">指定URL路径地址</param>
+            <param name="timeout">超时时间设置</param>
+            <returns>服务器ATN结果</returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit">
+            <summary>
+            类名：Submit
+            功能：支付宝各接口请求提交类
+            详细：构造支付宝各接口表单HTML文本，获取远程HTTP数据
+            版本：3.3
+            修改日期：2011-07-05
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequestMysign(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            生成请求时的签名
+            </summary>
+            <param name="sPara">请求给支付宝的参数数组</param>
+            <returns>签名结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequestPara(System.Collections.Generic.SortedDictionary{System.String,System.String})">
+            <summary>
+            生成要请求给支付宝的参数数组
+            </summary>
+            <param name="sParaTemp">请求前的参数数组</param>
+            <returns>要请求的参数数组</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequestParaToString(System.Collections.Generic.SortedDictionary{System.String,System.String},System.Text.Encoding)">
+            <summary>
+            生成要请求给支付宝的参数数组
+            </summary>
+            <param name="sParaTemp">请求前的参数数组</param>
+            <param name="code">字符编码</param>
+            <returns>要请求的参数数组字符串</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequest(System.Collections.Generic.SortedDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            建立请求，以表单HTML形式构造（默认）
+            </summary>
+            <param name="sParaTemp">请求参数数组</param>
+            <param name="strMethod">提交方式。两个值可选：post、get</param>
+            <param name="strButtonValue">确认按钮显示文字</param>
+            <returns>提交表单HTML文本</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequest(System.Collections.Generic.SortedDictionary{System.String,System.String})">
+            <summary>
+            建立请求，以模拟远程HTTP的POST请求方式构造并获取支付宝的处理结果
+            </summary>
+            <param name="sParaTemp">请求参数数组</param>
+            <returns>支付宝处理结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.BuildRequest(System.Collections.Generic.SortedDictionary{System.String,System.String},System.String,System.String,System.Byte[],System.String,System.Int32)">
+            <summary>
+            建立请求，以模拟远程HTTP的POST请求方式构造并获取支付宝的处理结果，带文件上传功能
+            </summary>
+            <param name="sParaTemp">请求参数数组</param>
+            <param name="strMethod">提交方式。两个值可选：post、get</param>
+            <param name="fileName">文件绝对路径</param>
+            <param name="data">文件数据</param>
+            <param name="contentType">文件内容类型</param>
+            <param name="lengthFile">文件长度</param>
+            <returns>支付宝处理结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.Submit.Query_timestamp">
+            <summary>
+            用于防钓鱼，调用接口query_timestamp来获取时间戳的处理函数
+            注意：远程解析XML出错，与IIS服务器配置有关
+            </summary>
+            <returns>时间戳字符串</returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayMD5">
+            <summary>
+            类名：MD5
+            功能：MD5加密
+            版本：3.3
+            修改日期：2012-07-05
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayMD5.Sign(System.String,System.String,System.String)">
+            <summary>
+            签名字符串
+            </summary>
+            <param name="prestr">需要签名的字符串</param>
+            <param name="key">密钥</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>签名结果</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayHelper.AlipayMD5.Verify(System.String,System.String,System.String,System.String)">
+            <summary>
+            验证签名
+            </summary>
+            <param name="prestr">需要签名的字符串</param>
+            <param name="sign">签名结果</param>
+            <param name="key">密钥</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor">
+            <summary>
+            支付宝支付流程处理器
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.IPaymentProcessor">
+            <summary>
+            
+            </summary>
+            <typeparam name="TReponseModel"></typeparam>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.IPaymentProcessor.PostPayment(Weikeren.Utility.Payment.Models.PayRequestModel)">
+            <summary>
+            以默认的形式提交到银行
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.IPaymentProcessor.GetCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.IPaymentProcessor.DoCallback(Weikeren.Utility.Payment.Models.PayReponseModel,System.Action{Weikeren.Utility.Payment.Models.PayReponseModel},System.Action{Weikeren.Utility.Payment.Models.PayReponseModel})">
+            <summary>
+            处理Callback的逻辑
+            </summary>
+            <param name="resultModel">Callback返回结果</param>
+            <param name="pageCallbackAction">页面返回</param>
+            <param name="offlineCallbackAction">离线返回</param>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.IPaymentProcessor.PayWay">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.PostPayment(Weikeren.Utility.Payment.Models.PayRequestModel)">
+            <summary>
+            以默认的形式提交到银行
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.GetCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.getCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.postCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.DoCallback(Weikeren.Utility.Payment.Models.PayReponseModel,System.Action{Weikeren.Utility.Payment.Models.PayReponseModel},System.Action{Weikeren.Utility.Payment.Models.PayReponseModel})">
+            <summary>
+            处理Callback的逻辑
+            </summary>
+            <param name="reponseModel">Callback返回结果</param>
+            <param name="pageCallbackAction">页面返回</param>
+            <param name="offlineCallbackAction">离线返回</param>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.GetRequestPost">
+            <summary>
+            获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.GetRequestGet">
+            <summary>
+            获取支付宝GET过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.AlipayProcessor.PayWay">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.PayProcessorFactory">
+            <summary>
+            支付处理器工作 
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.PayProcessorFactory.CreatePayProcessor(Weikeren.Utility.Payment.Enum.PayWayEnum)">
+            <summary>
+            创建支付处理器
+            </summary>
+            <param name="payWay"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor">
+            <summary>
+            易宝支付流程处理器
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor.PostPayment(Weikeren.Utility.Payment.Models.PayRequestModel)">
+            <summary>
+            以默认的形式提交到银行
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor.GetCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor.getCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor.DoCallback(Weikeren.Utility.Payment.Models.PayReponseModel,System.Action{Weikeren.Utility.Payment.Models.PayReponseModel},System.Action{Weikeren.Utility.Payment.Models.PayReponseModel})">
+            <summary>
+            处理Callback的逻辑
+            </summary>
+            <param name="reponseModel">Callback返回结果</param>
+            <param name="pageCallbackAction">页面返回</param>
+            <param name="offlineCallbackAction">离线返回</param>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.YeepayProcessor.PayWay">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="T:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor">
+            <summary>
+            直付支付流程处理器
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor.PostPayment(Weikeren.Utility.Payment.Models.PayRequestModel)">
+            <summary>
+            以默认的形式提交到银行
+            </summary>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor.GetCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor.getCallbackResultModel(System.Web.HttpRequestBase)">
+            <summary>
+            银行CallBack返回的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor.DoCallback(Weikeren.Utility.Payment.Models.PayReponseModel,System.Action{Weikeren.Utility.Payment.Models.PayReponseModel},System.Action{Weikeren.Utility.Payment.Models.PayReponseModel})">
+            <summary>
+            处理Callback的逻辑
+            </summary>
+            <param name="reponseModel">返回结果</param>
+            <param name="pageCallbackAction">页面返回</param>
+            <param name="offlineCallbackAction">离线返回</param>
+        </member>
+        <member name="P:Weikeren.Utility.Payment.PayProcessor.ZhiFuProcessor.PayWay">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+    </members>
+</doc>

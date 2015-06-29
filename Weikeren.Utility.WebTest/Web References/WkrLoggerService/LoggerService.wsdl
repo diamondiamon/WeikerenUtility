@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ErrorMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="log" type="tns:ErrorLogger" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ErrorLogger">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Logger">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SenderClassName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlParameters" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InnerException" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Logger">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LogTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LogDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ErrorMessageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DebugMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="log" type="tns:DebugLogger" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DebugLogger">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Logger" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="DebugMessageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InfoMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="log" type="tns:InfoLogger" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InfoLogger">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Logger" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="InfoMessageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="WarnMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="log" type="tns:WarnLogger" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WarnLogger">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Logger" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WarnMessageResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ErrorMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:ErrorMessage" />
+  </wsdl:message>
+  <wsdl:message name="ErrorMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:ErrorMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="DebugMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:DebugMessage" />
+  </wsdl:message>
+  <wsdl:message name="DebugMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:DebugMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="InfoMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:InfoMessage" />
+  </wsdl:message>
+  <wsdl:message name="InfoMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:InfoMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="WarnMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:WarnMessage" />
+  </wsdl:message>
+  <wsdl:message name="WarnMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:WarnMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LoggerServiceSoap">
+    <wsdl:operation name="ErrorMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">写入错误日志</wsdl:documentation>
+      <wsdl:input message="tns:ErrorMessageSoapIn" />
+      <wsdl:output message="tns:ErrorMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DebugMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">写入调试日志</wsdl:documentation>
+      <wsdl:input message="tns:DebugMessageSoapIn" />
+      <wsdl:output message="tns:DebugMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InfoMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">写入消息日志</wsdl:documentation>
+      <wsdl:input message="tns:InfoMessageSoapIn" />
+      <wsdl:output message="tns:InfoMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WarnMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">写入警告日志</wsdl:documentation>
+      <wsdl:input message="tns:WarnMessageSoapIn" />
+      <wsdl:output message="tns:WarnMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoggerServiceSoap" type="tns:LoggerServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ErrorMessage">
+      <soap:operation soapAction="http://tempuri.org/ErrorMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebugMessage">
+      <soap:operation soapAction="http://tempuri.org/DebugMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InfoMessage">
+      <soap:operation soapAction="http://tempuri.org/InfoMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WarnMessage">
+      <soap:operation soapAction="http://tempuri.org/WarnMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LoggerServiceSoap12" type="tns:LoggerServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ErrorMessage">
+      <soap12:operation soapAction="http://tempuri.org/ErrorMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebugMessage">
+      <soap12:operation soapAction="http://tempuri.org/DebugMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InfoMessage">
+      <soap12:operation soapAction="http://tempuri.org/InfoMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WarnMessage">
+      <soap12:operation soapAction="http://tempuri.org/WarnMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoggerService">
+    <wsdl:port name="LoggerServiceSoap" binding="tns:LoggerServiceSoap">
+      <soap:address location="http://localhost:38625/LoggerService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LoggerServiceSoap12" binding="tns:LoggerServiceSoap12">
+      <soap12:address location="http://localhost:38625/LoggerService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

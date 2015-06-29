@@ -1,0 +1,7 @@
+﻿<configuration>
+  <appSettings>
+    <!--快递信息获取器-->
+    <add key="ExpressageType" value="kuaidi100"/>
+    
+  </appSettings>
+</configuration>

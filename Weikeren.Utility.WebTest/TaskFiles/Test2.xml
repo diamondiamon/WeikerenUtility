@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<WorkItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Title>Test2</Title>
+  <Description>Description</Description>
+  <StartAt>2015-06-09 12:15:20</StartAt>
+  <Frequency>EveryMinute</Frequency>
+  <Recurs>3</Recurs>
+  <GuidFlag>6597cfb5dda445629fb68a20f5f08710</GuidFlag>
+  <NextStart>2015-06-09 12:25:30</NextStart>
+  <LastRunTime>2015-06-09 12:22:30</LastRunTime>
+  <AssemblyInfo>Weikeren.Utility.WebTest,Weikeren.Utility.WebTest.TimingTaskWork.Task3</AssemblyInfo>
+  <State>Running</State>
+</WorkItem>

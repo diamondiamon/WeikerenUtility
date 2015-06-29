@@ -1,0 +1,6 @@
+﻿<configuration>
+  <appSettings>
+    <add key="Alipay_Partner" value="合作身份者ID"/>
+    <add key="Alipay_Key" value="交易安全检验码"/>
+  </appSettings>
+</configuration>

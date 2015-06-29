@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginAssemblies>
+  <PluginAssembly>
+    <PluginPath>~/Plugins/Sell/bin</PluginPath>
+    <AssemblyName>Weikeren.GroupBuy.Sell.dll</AssemblyName>
+    <ImplementIPlugClassName>Weikeren.GroupBuy.Sell.SellPlugin</ImplementIPlugClassName>
+  </PluginAssembly>
+</PluginAssemblies>

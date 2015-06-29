@@ -1,0 +1,13 @@
+﻿1.通过NuGet引用Autofac 3.5.2
+2.通过NuGet引用Autofac.MVC4 3.1.0
+3.实现类DependencyRegister（注册）
+4.在系统启动时调用 Weikeren.Utility.DenpendencyInjection.DependencyManager.Instance.Init(new DIRegister()); //DIRegister就是实现DependencyRegister的实现类
+
+
+
+
+
+
+
+
+

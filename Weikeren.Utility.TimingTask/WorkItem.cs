@@ -41,7 +41,7 @@ namespace Weikeren.Utility.TimingTask
                 if (NextStart == null)
                     return string.Empty;
 
-                return this.NextStart.Value.ToString("yyyy-MM-dd hh:mm:ss");
+                return this.NextStart.Value.ToString("yyyy-MM-dd HH:mm:ss");
             }
             set
             {
@@ -67,7 +67,7 @@ namespace Weikeren.Utility.TimingTask
                 if (LastRunTime == null)
                     return string.Empty;
 
-                return this.LastRunTime.Value.ToString("yyyy-MM-dd hh:mm:ss");
+                return this.LastRunTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
             }
             set
             {
@@ -172,9 +172,9 @@ namespace Weikeren.Utility.TimingTask
                 }
                 _tokenSrc = tokenSrc;
 
-                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd hh:mm:ss}]开始执行",DateTime.Now,Title));
+                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行",DateTime.Now,Title));
                 _job.Execute();
-                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd hh:mm:ss}]执行完成", DateTime.Now, Title));
+                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
                 this.LastRunTime = DateTime.Now;
                 //this.NextStart = GetNextStartTime(this.LastRunTime);
 
@@ -182,7 +182,7 @@ namespace Weikeren.Utility.TimingTask
                 if (Frequency == Frequencies.OneTime)
                 {
                     this.State = TaskStates.Completed;
-                    //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd hh:mm:ss}]完成任务，不再执行", DateTime.Now, Title));
+                    //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]完成任务，不再执行", DateTime.Now, Title));
                 }
                 else
                 {
@@ -193,7 +193,7 @@ namespace Weikeren.Utility.TimingTask
 
                     this.State = TaskStates.Running;
                     NextStart = GetNextStartTime(LastRunTime);
-                    //writeMessageToLog(string.Format("任务（{1}）下次执行时间在[{0:yyyy-MM-dd hh:mm:ss}]", NextStart, Title));
+                    //writeMessageToLog(string.Format("任务（{1}）下次执行时间在[{0:yyyy-MM-dd HH:mm:ss}]", NextStart, Title));
                 }
                 this.Save();
             }

@@ -47,7 +47,7 @@ namespace Weikeren.Utility.TimingTask
                 if (StartAt == null)
                     return string.Empty;
 
-                return this.StartAt.Value.ToString("yyyy-MM-dd hh:mm:ss");
+                return this.StartAt.Value.ToString("yyyy-MM-dd HH:mm:ss");
             }
             set
             {

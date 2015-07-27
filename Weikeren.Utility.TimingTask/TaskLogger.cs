@@ -47,7 +47,7 @@ namespace Weikeren.Utility.TimingTask
 
                 using (StreamWriter sw = File.AppendText(string.Format(@"{0}/{1}_{2:yyyy_MM_dd}.log", path, taskName,DateTime.Now)))
                 {
-                    sw.Write("日志记录时间：" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "\r\n");
+                    sw.Write("日志记录时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n");
                     sw.Write(message);
                     sw.Write("\r\n");
                     sw.Write("\r\n");

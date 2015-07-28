@@ -172,9 +172,9 @@ namespace Weikeren.Utility.TimingTask
                 }
                 _tokenSrc = tokenSrc;
 
-                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行",DateTime.Now,Title));
+                writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行",DateTime.Now,Title));
                 _job.Execute();
-                //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
+                writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
                 this.LastRunTime = DateTime.Now;
                 //this.NextStart = GetNextStartTime(this.LastRunTime);
 

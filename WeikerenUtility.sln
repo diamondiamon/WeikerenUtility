@@ -1,8 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseLibs", "BaseLibs", "{F116217A-C33E-488B-A4AA-D6A04C0F6D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{517D6BC7-894A-4374-BC46-4BC3DCA3B18A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{661B0FAE-5C3A-4631-A385-20AA8DA42AFB}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.Payment", "Weikeren.Utility.Payment\Weikeren.Utility.Payment.csproj", "{4A0C3324-E3A6-45C1-AFD5-9215305DD429}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.WebTest", "Weikeren.Utility.WebTest\Weikeren.Utility.WebTest.csproj", "{C236935A-8B2B-4167-822B-74969B3A1B27}"
@@ -21,12 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.UnitTest", "Weikeren.Utility.UnitTest\Weikeren.Utility.UnitTest.csproj", "{C18F41F1-1B18-4C11-8669-2B07C89BC249}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.PaymentTest", "Weikeren.PaymentTest\Weikeren.PaymentTest.csproj", "{89688961-EA10-4DCC-B27B-4FA6536702D8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseLibs", "BaseLibs", "{F116217A-C33E-488B-A4AA-D6A04C0F6D83}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{517D6BC7-894A-4374-BC46-4BC3DCA3B18A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{661B0FAE-5C3A-4631-A385-20AA8DA42AFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.LogWeb", "Weikeren.Utility.LogWeb\Weikeren.Utility.LogWeb.csproj", "{A9204768-7780-486C-990C-D01947CCEFDD}"
 EndProject

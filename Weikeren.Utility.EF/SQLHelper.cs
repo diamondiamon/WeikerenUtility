@@ -13,6 +13,8 @@ namespace Weikeren.Utility.EF
     /// </summary>
     public class SQLHelper :ISQLHelper
     {
+        private static readonly object _syncRoot = new object();
+
         private IDbConnection _conn;
 
         public SQLHelper(IDbConnection conn)
@@ -246,13 +248,23 @@ namespace Weikeren.Utility.EF
         }
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
+        /// <returns></returns>
         protected T ExecuteAction<T>(Func<IDbConnection, T> action)
         {
             using (_conn)
             {
                 try
                 {
-                    return action.Invoke(_conn);
+                    lock (_syncRoot)
+                    {
+                        return action.Invoke(_conn);
+                    }
+
                 }
                 catch (Exception ex)
                 {

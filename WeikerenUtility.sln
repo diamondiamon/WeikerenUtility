@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.Expressage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.PluginMvcWeb", "Weikeren.Utility.PluginMvcWeb\Weikeren.Utility.PluginMvcWeb.csproj", "{468F0F11-1E2D-48DF-9141-5C9A1B87B2CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weikeren.Utility.MDB", "Weikeren.Utility.MDB\Weikeren.Utility.MDB.csproj", "{5D29DBEA-7114-4C06-AD8A-8711AF1288B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,10 @@ Global
 		{468F0F11-1E2D-48DF-9141-5C9A1B87B2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{468F0F11-1E2D-48DF-9141-5C9A1B87B2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{468F0F11-1E2D-48DF-9141-5C9A1B87B2CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D29DBEA-7114-4C06-AD8A-8711AF1288B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D29DBEA-7114-4C06-AD8A-8711AF1288B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D29DBEA-7114-4C06-AD8A-8711AF1288B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D29DBEA-7114-4C06-AD8A-8711AF1288B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +113,6 @@ Global
 		{B4B7651E-46BA-41A9-8602-89232099BCCE} = {F116217A-C33E-488B-A4AA-D6A04C0F6D83}
 		{4A2A0C13-A460-40CE-AC6A-2B47CC375B59} = {F116217A-C33E-488B-A4AA-D6A04C0F6D83}
 		{468F0F11-1E2D-48DF-9141-5C9A1B87B2CC} = {F116217A-C33E-488B-A4AA-D6A04C0F6D83}
+		{5D29DBEA-7114-4C06-AD8A-8711AF1288B0} = {F116217A-C33E-488B-A4AA-D6A04C0F6D83}
 	EndGlobalSection
 EndGlobal

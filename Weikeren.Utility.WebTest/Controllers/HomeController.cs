@@ -20,9 +20,9 @@ namespace Weikeren.Utility.WebTest.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index7u()
+        public ActionResult Indexttttt()
         {
-            ViewBag.Message = "99sModify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             var dt = DateTime.MinValue;
             return View();
         }

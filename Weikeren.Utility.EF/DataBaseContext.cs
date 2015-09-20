@@ -66,7 +66,6 @@ namespace Weikeren.Utility.EF
             {
                 var context = ((IObjectContextAdapter)(this)).ObjectContext;
                 var connection = this.Database.Connection;
-
                 return new SQLHelper(connection);
             }
         }

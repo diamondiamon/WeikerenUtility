@@ -20,7 +20,7 @@ namespace Weikeren.Utility.WebTest.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index7u()
         {
             ViewBag.Message = "99sModify this template to jump-start your ASP.NET MVC application.";
             var dt = DateTime.MinValue;

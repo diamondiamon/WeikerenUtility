@@ -105,7 +105,7 @@ namespace Weikeren.Utility.EF
         public void Update(IList<TEntity> models)
         {
             if (models == null)
-                throw new ArgumentNullException("RoleFunction is null");
+                throw new ArgumentNullException("models is null");
             //foreach (TEntity model in models)
             //{
             //    this.Entities.Add(model);

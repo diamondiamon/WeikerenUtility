@@ -10,8 +10,12 @@ namespace Weikeren.Utility.MDB
     /// <summary>
     /// 聚合根
     /// </summary>
+    [Serializable]
     public class BaseEntity
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseEntity()
         {
 
@@ -25,7 +29,7 @@ namespace Weikeren.Utility.MDB
         /// 主键
         /// </summary>
         [BsonId]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// 对应的文档名称

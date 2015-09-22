@@ -19,10 +19,19 @@ namespace Weikeren.Utility.MDB
         /// 
         /// </summary>
         /// <param name="connectionName"></param>
-        public DataBaseContext(string connectionString,string dbName)
+        public DataBaseContext(string connectionName)
         {
-            _mongoClient = new MongoClient(connectionString);
-            _mongoDatabase = _mongoClient.GetDatabase(dbName);
+            string connection = System.Configuration.ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            if (string.IsNullOrEmpty(connection))
+                throw new Exception("链接字符串为空");
+
+            var spiltString = connection.Split(';');
+            if (spiltString.Length != 2)
+                throw new Exception("链接字符串格式有误");
+
+
+            _mongoClient = new MongoClient(spiltString[0]);
+            _mongoDatabase = _mongoClient.GetDatabase(spiltString[1]);
             
         }
        

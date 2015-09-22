@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,22 @@ namespace Weikeren.Utility.MDB
     /// <summary>
     /// 聚合根
     /// </summary>
-    public abstract class BaseEntity
+    public class BaseEntity
     {
+        public BaseEntity()
+        {
+
+        }
+        /// <summary>
+        /// 主键名称
+        /// </summary>
+        protected internal readonly string EntityKey = "Id";
+
         /// <summary>
         /// 主键
         /// </summary>
-        public virtual int Id { get; set; }
+        [BsonId]
+        public int Id { get; set; }
 
         /// <summary>
         /// 对应的文档名称

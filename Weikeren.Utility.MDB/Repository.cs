@@ -4,25 +4,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Weikeren.Utility.MDB
 {
     public class Repository<TEntity> : DisposableObject,IRepository<TEntity>
-        where TEntity : BaseEntity
+        where TEntity : BaseEntity,new()
     {
         private readonly IDataBaseContext _context;
-        
+        private IMongoCollection<TEntity> _entities;
+
         /// <summary>
-        /// 数据库上下文
+        /// 数据库上下文      
         /// </summary>
         public IDataBaseContext Context
         {
             get { return _context; }
         }
 
-        
+        /// <summary>
+        /// 数据实体
+        /// </summary>
+        private IMongoCollection<TEntity> Entities
+        {
+            get
+            {
+                if (_entities == null)
+                    _entities = _context.Set<TEntity>();
+                return _entities;
+            }
+        }
+
+        /// <summary>
+        /// 可查询实体
+        /// </summary>
+        public virtual IQueryable<TEntity> Table
+        {
+            get
+            {
+                return _context.Set<TEntity>().AsQueryable();
+            }
+        }
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -41,7 +66,11 @@ namespace Weikeren.Utility.MDB
         {
             if (model == null)
                 throw new ArgumentNullException("entity null");
-            _context.Set<TEntity>().Insert(model);
+            if (model.Id == 0)
+            {
+                model.Id = _context.GetIncrementId<TEntity>();
+            }
+            Entities.InsertOneAsync(model).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -53,7 +82,7 @@ namespace Weikeren.Utility.MDB
             if (models == null)
                 throw new ArgumentNullException("entity null");
 
-            _context.Set<TEntity>().InsertBatch(models);
+            Entities.InsertManyAsync(models).GetAwaiter().GetResult();
             
         }
 
@@ -66,10 +95,20 @@ namespace Weikeren.Utility.MDB
             if (entity == null)
                 throw new ArgumentNullException("entity null");
 
-            var query = new QueryDocument { { "Id", entity.Id } };
-            BsonDocument bd = BsonExtensionMethods.ToBsonDocument(entity);
-            var update = new UpdateDocument { { "$set", new QueryDocument(bd) } };
-            _context.Set<TEntity>().Update(query, update);
+            var filter = Builders<TEntity>.Filter.Eq(s => s.Id, entity.Id);
+
+            
+            var fieldList = new List<UpdateDefinition<TEntity>>();
+            foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (property.Name != entity.EntityKey)//更新集中不能有实体键_id
+                {
+                    fieldList.Add(Builders<TEntity>.Update.Set(property.Name, property.GetValue(entity)));
+                }
+            }
+            
+            ForWait(() => Entities.UpdateOneAsync(filter, Builders<TEntity>.Update.Combine(fieldList))).GetAwaiter().GetResult();
+            
                 
         }
 
@@ -80,7 +119,7 @@ namespace Weikeren.Utility.MDB
         public void Update(IList<TEntity> models)
         {
             if (models == null)
-                throw new ArgumentNullException("RoleFunction is null");
+                throw new ArgumentNullException("models is null");
             
             if(models!=null && models.Count>0)
             {
@@ -100,8 +139,8 @@ namespace Weikeren.Utility.MDB
             if (entity == null)
                 throw new ArgumentNullException("entity null");
 
-            var query = new QueryDocument { { "Id", entity.Id } };
-            _context.Set<TEntity>().Remove(query);
+            var filter = Builders<TEntity>.Filter.Eq(s => s.Id, entity.Id);
+            var result  = Entities.DeleteOneAsync(filter).GetAwaiter().GetResult();
         }
 
         
@@ -111,8 +150,8 @@ namespace Weikeren.Utility.MDB
         /// <param name="id"></param>
         public void DeleteById(int id)
         {
-            var query = new QueryDocument { { "Id", id } };
-            _context.Set<TEntity>().Remove(query);
+            var filter = Builders<TEntity>.Filter.Eq(s => s.Id, id);
+            var result = Entities.DeleteOneAsync(filter).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -121,8 +160,8 @@ namespace Weikeren.Utility.MDB
         /// <param name="whereLamdba">条件</param>
         public void DeleteBy(Expression<Func<TEntity, bool>> whereLamdba)
         {
-            throw new NotImplementedException();
-
+            Entities.DeleteManyAsync(whereLamdba).GetAwaiter().GetResult();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -132,8 +171,9 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public TEntity GetbyId(int id)
         {
-            var query = new QueryDocument { { "Id", id } };
-            var model = _context.Set<TEntity>().FindOne(query);
+            var filter = Builders<TEntity>.Filter.Eq(s => s.Id, id);
+            var model = Entities.Find(filter).FirstOrDefaultAsync().GetAwaiter().GetResult();
+            //var model = Table.Where(c => c.Id == id).FirstOrDefault();
 
             return model;
         }
@@ -161,34 +201,33 @@ namespace Weikeren.Utility.MDB
         /// <returns>分页集合类</returns>
         public IPagedList<TEntity> SearchWithPager(Expression<Func<TEntity, bool>> searchCondition, int pageSize, int pageIndex, Expression<Func<TEntity, dynamic>> sortPredicate, SortOrder sortOrder= SortOrder.Desc)
         {
-            throw new NotImplementedException();
-            //IQueryable<TEntity> query;
+            IQueryable<TEntity> query;
 
-            //if (searchCondition != null)
-            //    query = this.Entities.Where(searchCondition.Compile()).AsQueryable();
-            //else
-            //    query = this.Entities;
+            if (searchCondition != null)
+                query = this.Table.Where(searchCondition.Compile()).AsQueryable();
+            else
+                query = this.Table;
 
-            //if (sortPredicate != null)
-            //{
-            //    switch (sortOrder)
-            //    {
-            //        case SortOrder.Asc:
-            //            query = query.SortBy(sortPredicate);
-            //            break;
-            //        case SortOrder.Desc:
-            //            query = query.SortByDescending(sortPredicate);
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    query = query.SortBy(c => c.Id);
-            //}
+            if (sortPredicate != null)
+            {
+                switch (sortOrder)
+                {
+                    case SortOrder.Asc:
+                        query = query.OrderBy(sortPredicate);
+                        break;
+                    case SortOrder.Desc:
+                        query = query.OrderByDescending(sortPredicate);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                query = query.OrderBy(c => c.Id);
+            }
 
-            //return new PagedList<TEntity>(query, pageIndex, pageSize);
+            return new PagedList<TEntity>(query, pageIndex, pageSize);
 
         }
         /// <summary>
@@ -198,7 +237,9 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public int Count(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return (int)Entities.CountAsync(expression).GetAwaiter().GetResult();
+            //Entities.CountAsync()
+            //throw new NotImplementedException();
             //_context.Set<TEntity>().Count();
             //return Entities.Where(expression).Count();
         }
@@ -210,7 +251,8 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public bool Exists(Expression<Func<TEntity, bool>> expression)
         {
-            return Count(expression) > 0;
+            var result = Table.Where(expression).FirstOrDefault();
+            return (result != null);
         }
 
         /// <summary>
@@ -220,8 +262,7 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public IList<TEntity> Search(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
-            //return Entities.Where(expression).Select(c => c).ToList();
+            return Table.Where(expression).Select(c => c).ToList();
         }
         /// <summary>
         ///  通用查询
@@ -231,8 +272,7 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public IList<TResult> Search<TResult>(Expression<Func<TEntity, bool>> expression, Func<TEntity, TResult> sector)
         {
-            throw new NotImplementedException();
-            //return Entities.Where(expression).Select(sector).ToList();
+            return Table.Where(expression).Select(sector).ToList();
         }
         /// <summary>
         ///  通用查询
@@ -241,8 +281,7 @@ namespace Weikeren.Utility.MDB
         /// <returns></returns>
         public TEntity SearchSingle(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
-            //return Entities.Where(expression).Select(c => c).FirstOrDefault();
+            return Table.Where(expression).Select(c => c).FirstOrDefault();
         }
         #endregion
 
@@ -255,5 +294,17 @@ namespace Weikeren.Utility.MDB
             DisposeIt(_context);
         }
         #endregion
+
+        /// <summary>
+        /// 等待Task执行完成后再返回
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        private Task ForWait(Func<Task> func)
+        {
+            var t = func();
+            t.Wait();
+            return t;
+        }
     }
 }

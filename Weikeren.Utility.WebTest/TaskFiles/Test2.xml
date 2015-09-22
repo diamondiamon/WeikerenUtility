@@ -6,8 +6,8 @@
   <Frequency>EveryMinute</Frequency>
   <Recurs>3</Recurs>
   <GuidFlag>6597cfb5dda445629fb68a20f5f08710</GuidFlag>
-  <NextStart>2015-06-09 12:25:30</NextStart>
-  <LastRunTime>2015-06-09 12:22:30</LastRunTime>
+  <NextStart>2015-09-22 14:47:09</NextStart>
+  <LastRunTime>2015-09-22 14:44:09</LastRunTime>
   <AssemblyInfo>Weikeren.Utility.WebTest,Weikeren.Utility.WebTest.TimingTaskWork.Task3</AssemblyInfo>
   <State>Running</State>
 </WorkItem>

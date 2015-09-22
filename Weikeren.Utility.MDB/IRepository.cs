@@ -8,10 +8,10 @@ namespace Weikeren.Utility.MDB
     public interface IRepository<TEntity> : IDisposable
         where TEntity : BaseEntity
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //IQueryable<TEntity> Table { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        IQueryable<TEntity> Table { get; }
 
         /// <summary>
         /// 数据库上下文

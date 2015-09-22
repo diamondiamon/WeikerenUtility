@@ -13,6 +13,14 @@ namespace Weikeren.Utility.MDB
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        MongoCollection<TEntity> Set<TEntity>() where TEntity : BaseEntity;
+        IMongoCollection<TEntity> Set<TEntity>() where TEntity : BaseEntity,new();
+
+        /// <summary>
+        /// 得到自增Id
+        /// </summary>
+        /// <param name="collectionName"></param>
+        /// <returns></returns>
+        int GetIncrementId<TEntity>() where TEntity : BaseEntity, new();
+
     }
 }

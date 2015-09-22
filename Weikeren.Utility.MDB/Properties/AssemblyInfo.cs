@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Weikeren.Utility.MDB")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MonogDB仓储库")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("广州一唯信息技术有限公司")]
 [assembly: AssemblyProduct("Weikeren.Utility.MDB")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

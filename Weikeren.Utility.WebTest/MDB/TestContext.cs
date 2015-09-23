@@ -17,7 +17,7 @@ namespace Weikeren.Utility.WebTest.MDB
         }
 
         public TestContext()
-            :base("mongodb://192.168.1.123:27017", "TestDB")
+            : base("MDBContext")
         {
                 
         }

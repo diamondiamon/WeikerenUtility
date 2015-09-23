@@ -93,7 +93,7 @@ namespace Weikeren.Utility.WebTest.Controllers
         {
             Student s = new Student();
             //s.Id = 1;
-            s.CollectionName = "Student";
+            //s.CollectionName = "Student";
             s.Name = name;
             s.Age = age;
             s.Score = 100;

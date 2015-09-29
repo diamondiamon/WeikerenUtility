@@ -18,6 +18,7 @@ namespace Weikeren.Utility.TimingTask
         public TaskDescriptor()
         {
             Recurs = 1;
+            IsFixedTime = false;
         }
 
         /// <summary>
@@ -63,6 +64,11 @@ namespace Weikeren.Utility.TimingTask
         /// 频率间隔值（默认为1）
         /// </summary>
         public int Recurs { get; set; }
+
+        /// <summary>
+        /// 是否在固定时间上执行（默认为False，即执行完后，再暂停设置的时间间隔后再执行，若设置为True，即固定相隔多久执行一次，不管相隔时间内是否执行完成）
+        /// </summary>
+        public bool IsFixedTime { get; set; }
 
         /// <summary>
         /// 下次执行的时间

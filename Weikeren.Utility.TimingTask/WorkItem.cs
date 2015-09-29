@@ -107,6 +107,7 @@ namespace Weikeren.Utility.TimingTask
             this.AssemblyInfo = item.AssemblyInfo;
             this.State = item.State;
             this.GuidFlag = item.GuidFlag;
+            this.IsFixedTime = item.IsFixedTime;
         }
 
         /// <summary>
@@ -238,6 +239,7 @@ namespace Weikeren.Utility.TimingTask
             item.State = this.State;
             item.Title = this.Title;
             item.GuidFlag = this.GuidFlag;
+            item.IsFixedTime = this.IsFixedTime;
         }
     }
 }

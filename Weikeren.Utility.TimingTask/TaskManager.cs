@@ -107,6 +107,7 @@ namespace Weikeren.Utility.TimingTask
                 {
                     checkWorksToDo();
                 }, _token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
         }
 
         ///// <summary>
@@ -248,7 +249,18 @@ namespace Weikeren.Utility.TimingTask
                     }
 
                     var ts = work.GetWaitSeconds();
+
+                    DateTime dt1 = DateTime.Now;
                     workItem.Run(tokenSrc);
+                    DateTime dt2 = DateTime.Now;
+
+                    //是否在固定时间上执行
+                    if(workItem.IsFixedTime)
+                    {
+                        var ts2 = dt2 - dt1; //该任务执行了多长时间
+                        ts = ts - ts2;//减去执行的时间
+                    }
+
                     if (ts.TotalMilliseconds > 0)
                     {
                         if (!tokenSrc.IsCancellationRequested)

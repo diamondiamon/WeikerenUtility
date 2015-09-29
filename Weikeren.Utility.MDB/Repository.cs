@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Weikeren.Utility.MDB
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class Repository<TEntity> : DisposableObject,IRepository<TEntity>
         where TEntity : BaseEntity,new()
     {
@@ -44,7 +48,7 @@ namespace Weikeren.Utility.MDB
         {
             get
             {
-                return _context.Set<TEntity>().AsQueryable();
+                return _context.Table<TEntity>();
             }
         }
 

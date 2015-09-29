@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Weikeren.Utility.MDB
 {
@@ -40,24 +41,40 @@ namespace Weikeren.Utility.MDB
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public IMongoCollection<TEntity> Set<TEntity>() where TEntity : BaseEntity,new()
+        public IMongoCollection<TEntity> Set<TEntity>(string collectionName="") where TEntity : BaseEntity,new()
         {
-            var collectionName = typeof(TEntity).Name;
+            if(string.IsNullOrEmpty(collectionName))
+            {
+                collectionName = typeof(TEntity).Name;
+            }
             var collection = _mongoDatabase.GetCollection<TEntity>(collectionName);
             return collection;
+        }
+
+        /// <summary>
+        /// 可查询实体
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns></returns>
+        public IQueryable<TEntity> Table<TEntity>(string collectionName = "") where TEntity : BaseEntity, new()
+        {
+            return Set<TEntity>(collectionName).AsQueryable();
         }
 
         private readonly static object lockFlag = new object();
         /// <summary>
         /// 得到自增Id
         /// </summary>
-        /// <param name="collectionName"></param>
+        /// <param name="pkCollectionName"></param>
         /// <returns></returns>
-        public int GetIncrementId<TEntity>() where TEntity : BaseEntity, new()
+        public int GetIncrementId<TEntity>(string pkCollectionName = "") where TEntity : BaseEntity, new()
         {
             lock(lockFlag)
             {
-                var pkCollectionName = typeof(TEntity).Name;
+                if(string.IsNullOrEmpty(pkCollectionName))
+                {
+                    pkCollectionName = typeof(TEntity).Name;
+                }
                 var collectionName = "PrimaryKeyInfo";
                 var collection = _mongoDatabase.GetCollection<PrimaryKeyInfo>(collectionName);
                 var currentKey = collection.Find(c => c.CollectionName == pkCollectionName).FirstOrDefaultAsync().GetAwaiter().GetResult();

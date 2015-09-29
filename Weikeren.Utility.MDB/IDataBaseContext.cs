@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using System;
+using System.Linq;
 
 namespace Weikeren.Utility.MDB
 {
@@ -13,14 +14,21 @@ namespace Weikeren.Utility.MDB
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        IMongoCollection<TEntity> Set<TEntity>() where TEntity : BaseEntity,new();
+        IMongoCollection<TEntity> Set<TEntity>(string collectionName="") where TEntity : BaseEntity, new();
+
+        /// <summary>
+        /// 可查询实体
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns></returns>
+        IQueryable<TEntity> Table<TEntity>(string collectionName = "") where TEntity : BaseEntity, new();
 
         /// <summary>
         /// 得到自增Id
         /// </summary>
-        /// <param name="collectionName"></param>
+        /// <param name="pkCollectionName"></param>
         /// <returns></returns>
-        int GetIncrementId<TEntity>() where TEntity : BaseEntity, new();
+        int GetIncrementId<TEntity>(string pkCollectionName = "") where TEntity : BaseEntity, new();
 
     }
 }

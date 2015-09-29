@@ -31,6 +31,11 @@ namespace Weikeren.Utility.MDB
         [BsonId]
         public virtual int Id { get; set; }
 
+        ///// <summary>
+        ///// 集合名称
+        ///// </summary>
+        //public virtual string CollectionName { get; set; }
+
     }
     ///// <summary>
     ///// 聚合根

@@ -86,15 +86,17 @@ namespace Weikeren.Utility.WebTest.Controllers
         {
             WorkItem wi = new WorkItem()
             {
+                IsFixedTime = true,
                 Title = "Test0",
                 Description = "Description",
-                State = Utility.TimingTask.Enums.TaskStates.Ready,
-                AssemblyInfo = "Weikeren.Utility.WebTest,Weikeren.Utility.WebTest.TimingTaskWork.Task1",
+                State = Utility.TimingTask.Enums.TaskStates.Running,
+                AssemblyInfo = "Weikeren.Utility.WebTest,Weikeren.Utility.WebTest.TimingTaskWork.TaskV2_1",
                 Frequency = Utility.TimingTask.Enums.Frequencies.EverySecond,
                 LastRunTime = DateTime.Now,
-                Recurs = 1
+                Recurs = 5,
             };
             wi.Save();
+            return Content("Success");
 
             wi = new WorkItem()
             {

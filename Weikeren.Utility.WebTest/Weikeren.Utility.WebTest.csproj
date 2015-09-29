@@ -286,6 +286,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="TimingTaskWork\Task1.cs" />
+    <Compile Include="TimingTaskWork\TaskV2.cs" />
     <Compile Include="Web References\WkrLoggerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -52,7 +52,67 @@ namespace Weikeren.Utility.TimingTask
             }
             set
             {
-                this.StartAt = DateTime.Parse(value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.StartAt = DateTime.Parse(value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 下一次运行的时间
+        /// </summary>
+        [XmlIgnore]
+        public DateTime? NextStart { get; set; }
+
+        /// <summary>
+        /// 替代屬性
+        /// </summary>
+        [XmlElement("NextStart")]
+        public string NextStartString
+        {
+            get
+            {
+                if (NextStart == null)
+                    return string.Empty;
+
+                return this.NextStart.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.NextStart = DateTime.Parse(value);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 上一次运行的时间
+        /// </summary>
+        [XmlIgnore]
+        public DateTime? LastRunTime { get; set; }
+
+        /// <summary>
+        /// 替代屬性
+        /// </summary>
+        [XmlElement("LastRunTime")]
+        public string LastRunTimeString
+        {
+            get
+            {
+                if (LastRunTime == null)
+                    return string.Empty;
+
+                return this.LastRunTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.LastRunTime = DateTime.Parse(value);
+                }
             }
         }
 
@@ -114,7 +174,10 @@ namespace Weikeren.Utility.TimingTask
         /// <returns></returns>
         public TimeSpan GetWaitSeconds()
         {
-
+            if(NextStart.HasValue && NextStart.Value>DateTime.Now)
+            {
+                return NextStart.Value - DateTime.Now;
+            }
             switch (Frequency)
             {
                 case Frequencies.EverySecond:

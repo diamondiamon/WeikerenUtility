@@ -25,57 +25,6 @@ namespace Weikeren.Utility.TimingTask
         public string GuidFlag { get;set; }
         
         /// <summary>
-        /// 下一次运行的时间
-        /// </summary>
-        [XmlIgnore]
-        public DateTime? NextStart { get; set; }
-
-        /// <summary>
-        /// 替代屬性
-        /// </summary>
-        [XmlElement("NextStart")]
-        public string NextStartString
-        {
-            get
-            {
-                if (NextStart == null)
-                    return string.Empty;
-
-                return this.NextStart.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            }
-            set
-            {
-                this.NextStart = DateTime.Parse(value);
-            }
-        }
-
-
-        /// <summary>
-        /// 上一次运行的时间
-        /// </summary>
-        [XmlIgnore]
-        public DateTime? LastRunTime { get; set; }
-
-        /// <summary>
-        /// 替代屬性
-        /// </summary>
-        [XmlElement("LastRunTime")]
-        public string LastRunTimeString
-        {
-            get
-            {
-                if (LastRunTime == null)
-                    return string.Empty;
-
-                return this.LastRunTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            }
-            set
-            {
-                this.LastRunTime = DateTime.Parse(value);
-            }
-        }
-
-        /// <summary>
         /// 程序集信息
         /// </summary>
         public string AssemblyInfo { get; set; }
@@ -127,7 +76,7 @@ namespace Weikeren.Utility.TimingTask
                 }
                 XmlHelper.XmlSerialize(path, this, this.GetType());
 
-                System.Diagnostics.Debug.WriteLine(string.Format("{0:yyyy-MM-dd HH:mm:ss}：{1}", DateTime.Now, this.State));
+                //System.Diagnostics.Debug.WriteLine(string.Format("{0:yyyy-MM-dd HH:mm:ss}：{1}", DateTime.Now, this.State));
             }
             catch { 
             }
@@ -173,34 +122,42 @@ namespace Weikeren.Utility.TimingTask
                 }
                 _tokenSrc = tokenSrc;
 
-                writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行",DateTime.Now,Title));
+                writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行", DateTime.Now, Title));
+                DateTime startExecuteTime = DateTime.Now;
+                if (StartAt == null)
+                {
+                    StartAt = startExecuteTime;
+                }
+                writeMessageToLog(string.Format("任务（{1}）执行类型是否为固定时间：{0}", this.IsFixedTime, Title));
+                if (this.IsFixedTime)
+                {
+                    //固定时间点上执行
+                    NextStart = GetNextStartTime(startExecuteTime);
+                    this.Save();
+                }
+
                 _job.Execute();
                 writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
                 this.LastRunTime = DateTime.Now;
-                //this.NextStart = GetNextStartTime(this.LastRunTime);
-
 
                 if (Frequency == Frequencies.OneTime)
                 {
                     this.State = TaskStates.Completed;
-                    //writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]完成任务，不再执行", DateTime.Now, Title));
                 }
                 else
                 {
-                    if (StartAt == null)
-                    {
-                        StartAt = LastRunTime;
-                    }
-
                     this.State = TaskStates.Running;
-                    NextStart = GetNextStartTime(LastRunTime);
-                    //writeMessageToLog(string.Format("任务（{1}）下次执行时间在[{0:yyyy-MM-dd HH:mm:ss}]", NextStart, Title));
+                    if (!this.IsFixedTime)
+                    {
+                        NextStart = GetNextStartTime(LastRunTime);
+                    }
                 }
+
+                writeMessageToLog(string.Format("任务（{1}）下次运行时间[{0:yyyy-MM-dd HH:mm:ss}]", NextStart, Title));
                 this.Save();
             }
             catch (Exception e)
             {
-                //this.State = TaskStates.Stop;
                 writeMessageToLog(e.StackTrace);
                 writeMessageToLog(string.Format("任务（{0}）发生异常，请管理员检查代码，任务尚未结束", Title));
             }

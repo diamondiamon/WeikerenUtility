@@ -95,18 +95,21 @@ namespace Weikeren.Utility.TimingTask
         /// </summary>
         public void StartTask()
         {
-            if (!CancelTokenSource.IsCancellationRequested && _workItems!=null)
-            {
-                return;
-            }
+            //if (!CancelTokenSource.IsCancellationRequested && _workItems!=null)
+            //{
+            //    return;
+            //}
 
-            _token = CancelTokenSource.Token;
+            //_token = CancelTokenSource.Token;
+            //_workItems = getAllTasks();
+            //var mainTask = Task.Factory.StartNew(
+            //    () =>
+            //    {
+            //        checkWorksToDo();
+            //    }, _token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
             _workItems = getAllTasks();
-            var mainTask = Task.Factory.StartNew(
-                () =>
-                {
-                    checkWorksToDo();
-                }, _token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            checkWorksToDo();
 
         }
 
@@ -222,11 +225,9 @@ namespace Weikeren.Utility.TimingTask
         /// <param name="work"></param>
         private void startOneWork(WorkItem work)
         {
-            var date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             var tokenSrc = new CancellationTokenSource();
             var task = Task.Factory.StartNew((state) =>
             {
-                //bool flag = true;
                 for (; ; )
                 {
                     if (work == null)
@@ -241,26 +242,16 @@ namespace Weikeren.Utility.TimingTask
                     }
 
 
-                    //if (work.State == Enums.TaskStates.Stop || work.State == Enums.TaskStates.Completed || work.State== Enums.TaskStates.Ready)
                     if (work.State != Enums.TaskStates.Running)
                     {
                         cancelTokenSource(tokenSrc);
                         break;
                     }
 
-                    var ts = work.GetWaitSeconds();
 
-                    DateTime dt1 = DateTime.Now;
                     workItem.Run(tokenSrc);
-                    DateTime dt2 = DateTime.Now;
-
-                    //是否在固定时间上执行
-                    if(workItem.IsFixedTime)
-                    {
-                        var ts2 = dt2 - dt1; //该任务执行了多长时间
-                        ts = ts - ts2;//减去执行的时间
-                    }
-
+                    var ts = work.GetWaitSeconds();
+                    
                     if (ts.TotalMilliseconds > 0)
                     {
                         if (!tokenSrc.IsCancellationRequested)
@@ -281,8 +272,6 @@ namespace Weikeren.Utility.TimingTask
                         break;
                     }
 
-                    //System.Diagnostics.Debug.WriteLine(string.Format("[{0}]的正在运行", date));
-                    //System.Diagnostics.Debug.WriteLine(_mainTask.Status);
                 }
             }, work, tokenSrc.Token);
         }

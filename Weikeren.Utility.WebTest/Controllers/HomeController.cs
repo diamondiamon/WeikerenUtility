@@ -237,44 +237,44 @@ namespace Weikeren.Utility.WebTest.Controllers
             return Content("Has AddOne");
         }
 
-        private void CheckWorksToDo(List<WorkItem> workers)
-        {
-            foreach (var worker in workers)
-            {
-                var tokenSrc = new CancellationTokenSource();
-                //worker.Cancellation = tokenSrc;
-                var task = Task.Factory.StartNew((state) =>
-                {
-                    bool flag = true;
-                    while (flag)
-                    {
-                        var workItem = state as WorkItem;
-                        var ts = worker.GetWaitSeconds();
-                        //workItem.Run();
-                        if (ts.TotalMilliseconds > 0)
-                        {
-                            tokenSrc.Token.WaitHandle.WaitOne(ts);
-                        }
-                        else
-                        {
-                            flag = false;
-                            tokenSrc.Cancel();
-                        }
-                    }
+        //private void CheckWorksToDo(List<WorkItem> workers)
+        //{
+        //    foreach (var worker in workers)
+        //    {
+        //        var tokenSrc = new CancellationTokenSource();
+        //        //worker.Cancellation = tokenSrc;
+        //        var task = Task.Factory.StartNew((state) =>
+        //        {
+        //            bool flag = true;
+        //            while (flag)
+        //            {
+        //                var workItem = state as WorkItem;
+        //                var ts = worker.GetWaitSeconds();
+        //                //workItem.Run();
+        //                if (ts.TotalMilliseconds > 0)
+        //                {
+        //                    tokenSrc.Token.WaitHandle.WaitOne(ts);
+        //                }
+        //                else
+        //                {
+        //                    flag = false;
+        //                    tokenSrc.Cancel();
+        //                }
+        //            }
 
-                    ////线程被取消后执行
-                    //tokenSrc.Token.Register(() =>
-                    //{
-                    //    flag = false;
-                    //});
+        //            ////线程被取消后执行
+        //            //tokenSrc.Token.Register(() =>
+        //            //{
+        //            //    flag = false;
+        //            //});
 
-                }, worker, tokenSrc.Token);
-
-
+        //        }, worker, tokenSrc.Token);
 
 
-            }
-        }
+
+
+        //    }
+        //}
         #endregion
 
         #region Log Test

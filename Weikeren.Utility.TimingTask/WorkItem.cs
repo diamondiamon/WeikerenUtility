@@ -99,11 +99,10 @@ namespace Weikeren.Utility.TimingTask
 
         }
 
-
         /// <summary>
         /// 运行任务
         /// </summary>
-        public void Run(CancellationTokenSource tokenSrc)
+        public void Run(CancellationTokenSource tokenSrc,Action beforeExecute = null,Action afterExecute=null)
         {
             if (StartAt.HasValue && StartAt.Value > DateTime.Now)
             {
@@ -121,40 +120,18 @@ namespace Weikeren.Utility.TimingTask
                     _job = (IJob)Assembly.Load(classInfo[0]).CreateInstance(classInfo[1]);
                 }
                 _tokenSrc = tokenSrc;
-
+                if (beforeExecute!=null)
+                {
+                    beforeExecute.Invoke();
+                }
                 writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行", DateTime.Now, Title));
-                DateTime startExecuteTime = DateTime.Now;
-                if (StartAt == null)
-                {
-                    StartAt = startExecuteTime;
-                }
-                writeMessageToLog(string.Format("任务（{1}）执行类型是否为固定时间：{0}", this.IsFixedTime, Title));
-                if (this.IsFixedTime)
-                {
-                    //固定时间点上执行
-                    NextStart = GetNextStartTime(startExecuteTime);
-                    this.Save();
-                }
-
                 _job.Execute();
                 writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
-                this.LastRunTime = DateTime.Now;
-
-                if (Frequency == Frequencies.OneTime)
+                if (beforeExecute != null)
                 {
-                    this.State = TaskStates.Completed;
+                    afterExecute.Invoke();
                 }
-                else
-                {
-                    this.State = TaskStates.Running;
-                    if (!this.IsFixedTime)
-                    {
-                        NextStart = GetNextStartTime(LastRunTime);
-                    }
-                }
-
-                writeMessageToLog(string.Format("任务（{1}）下次运行时间[{0:yyyy-MM-dd HH:mm:ss}]", NextStart, Title));
-                this.Save();
+               
             }
             catch (Exception e)
             {
@@ -162,6 +139,70 @@ namespace Weikeren.Utility.TimingTask
                 writeMessageToLog(string.Format("任务（{0}）发生异常，请管理员检查代码，任务尚未结束", Title));
             }
         }
+
+
+        ///// <summary>
+        ///// 运行任务
+        ///// </summary>
+        //public void Run(CancellationTokenSource tokenSrc)
+        //{
+        //    if (StartAt.HasValue && StartAt.Value > DateTime.Now)
+        //    {
+        //        return;
+        //    }
+        //    if (NextStart.HasValue && NextStart.Value > DateTime.Now)
+        //    {
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        if (_job == null)
+        //        {
+        //            string[] classInfo = AssemblyInfo.Split(',');
+        //            _job = (IJob)Assembly.Load(classInfo[0]).CreateInstance(classInfo[1]);
+        //        }
+        //        _tokenSrc = tokenSrc;
+
+        //        writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]开始执行", DateTime.Now, Title));
+        //        DateTime startExecuteTime = DateTime.Now;
+        //        if (StartAt == null)
+        //        {
+        //            StartAt = startExecuteTime;
+        //        }
+        //        writeMessageToLog(string.Format("任务（{1}）执行类型是否为固定时间：{0}", this.IsFixedTime, Title));
+        //        if (this.IsFixedTime)
+        //        {
+        //            //固定时间点上执行
+        //            NextStart = GetNextStartTime(startExecuteTime);
+        //            this.Save();
+        //        }
+
+        //        _job.Execute();
+        //        writeMessageToLog(string.Format("任务（{1}）在[{0:yyyy-MM-dd HH:mm:ss}]执行完成", DateTime.Now, Title));
+        //        this.LastRunTime = DateTime.Now;
+
+        //        if (Frequency == Frequencies.OneTime)
+        //        {
+        //            this.State = TaskStates.Completed;
+        //        }
+        //        else
+        //        {
+        //            this.State = TaskStates.Running;
+        //            if (!this.IsFixedTime)
+        //            {
+        //                NextStart = GetNextStartTime(LastRunTime);
+        //            }
+        //        }
+
+        //        writeMessageToLog(string.Format("任务（{1}）下次运行时间[{0:yyyy-MM-dd HH:mm:ss}]", NextStart, Title));
+        //        this.Save();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        writeMessageToLog(e.StackTrace);
+        //        writeMessageToLog(string.Format("任务（{0}）发生异常，请管理员检查代码，任务尚未结束", Title));
+        //    }
+        //}
 
         /// <summary>
         /// 

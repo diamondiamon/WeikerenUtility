@@ -11,7 +11,7 @@ namespace Weikeren.Utility.WebTest.TimingTaskWork
     {
         protected override void OnExecute()
         {
-            System.Diagnostics.Debug.WriteLine("任务1，时间：" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+            System.Diagnostics.Debug.WriteLine("任务1，时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             Thread.Sleep(5000);
         }
 

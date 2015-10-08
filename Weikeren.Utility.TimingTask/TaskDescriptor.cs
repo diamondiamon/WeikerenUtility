@@ -168,34 +168,34 @@ namespace Weikeren.Utility.TimingTask
 
 
         }
-        /// <summary>
-        /// 获取执行一次后要等待的时间间隔
-        /// </summary>
-        /// <returns></returns>
-        public TimeSpan GetWaitSeconds()
-        {
-            if(NextStart.HasValue && NextStart.Value>DateTime.Now)
-            {
-                return NextStart.Value - DateTime.Now;
-            }
-            switch (Frequency)
-            {
-                case Frequencies.EverySecond:
-                    return DateTime.Now.AddSeconds(Recurs) - DateTime.Now;
-                case Frequencies.EveryMinute:
-                    return DateTime.Now.AddMinutes(Recurs) - DateTime.Now;
-                case Frequencies.EveryHour:
-                    return DateTime.Now.AddHours(Recurs) - DateTime.Now;
-                case Frequencies.EveryDay:
-                    return DateTime.Now.AddDays(Recurs) - DateTime.Now;
-                case Frequencies.EveryWeek:
-                    return DateTime.Now.AddDays(7 * Recurs) - DateTime.Now;
-                case Frequencies.EveryMonth:
-                    return DateTime.Now.AddMonths(Recurs) - DateTime.Now;
-            }
+        ///// <summary>
+        ///// 获取执行一次后要等待的时间间隔
+        ///// </summary>
+        ///// <returns></returns>
+        //public TimeSpan GetWaitSeconds()
+        //{
+        //    if(NextStart.HasValue && NextStart.Value>DateTime.Now)
+        //    {
+        //        return NextStart.Value - DateTime.Now;
+        //    }
+        //    switch (Frequency)
+        //    {
+        //        case Frequencies.EverySecond:
+        //            return DateTime.Now.AddSeconds(Recurs) - DateTime.Now;
+        //        case Frequencies.EveryMinute:
+        //            return DateTime.Now.AddMinutes(Recurs) - DateTime.Now;
+        //        case Frequencies.EveryHour:
+        //            return DateTime.Now.AddHours(Recurs) - DateTime.Now;
+        //        case Frequencies.EveryDay:
+        //            return DateTime.Now.AddDays(Recurs) - DateTime.Now;
+        //        case Frequencies.EveryWeek:
+        //            return DateTime.Now.AddDays(7 * Recurs) - DateTime.Now;
+        //        case Frequencies.EveryMonth:
+        //            return DateTime.Now.AddMonths(Recurs) - DateTime.Now;
+        //    }
 
-            return new TimeSpan(0);
-        }
+        //    return new TimeSpan(0);
+        //}
 
     }
 }

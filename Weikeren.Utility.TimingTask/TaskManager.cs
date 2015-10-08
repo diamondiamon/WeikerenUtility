@@ -228,13 +228,14 @@ namespace Weikeren.Utility.TimingTask
             var tokenSrc = new CancellationTokenSource();
             var task = Task.Factory.StartNew((state) =>
             {
+                if (work == null)
+                    return;
+
+                var workItem = state as WorkItem;
+
                 for (; ; )
                 {
-                    if (work == null)
-                        break;
-
-                    var workItem = state as WorkItem;
-
+                    
                     if (tokenSrc.IsCancellationRequested)
                     {
                         workItem.State = Enums.TaskStates.Stop;
@@ -248,22 +249,86 @@ namespace Weikeren.Utility.TimingTask
                         break;
                     }
 
-
-                    workItem.Run(tokenSrc);
-                    var ts = work.GetWaitSeconds();
+                    bool canExecute = true;
                     
-                    if (ts.TotalMilliseconds > 0)
+                    if (workItem.StartAt.HasValue && workItem.StartAt.Value > DateTime.Now)
                     {
-                        if (!tokenSrc.IsCancellationRequested)
+                        canExecute = false;
+                    }
+                    if (workItem.NextStart.HasValue && workItem.NextStart.Value > DateTime.Now)
+                    {
+                        canExecute = false;
+                    }
+
+                    //不到时间，不能执行
+                    if (!canExecute)
+                    {
+                        if (workItem.IsFixedTime)
                         {
-                            tokenSrc.Token.WaitHandle.WaitOne(ts);
+                            //固定时间每分钟检查一次。
+                            var sleep = DateTime.Now.AddSeconds(1) - DateTime.Now;
+                            tokenSrc.Token.WaitHandle.WaitOne(sleep);
                         }
+                        else
+                        {
+                            //固定时间每分秒检查一次。
+                            var sleep = DateTime.Now.AddSeconds(1) - DateTime.Now;
+                            tokenSrc.Token.WaitHandle.WaitOne(sleep);
+                        }
+
+                        continue;
                     }
-                    else
-                    {
-                        cancelTokenSource(tokenSrc);
-                        break;
-                    }
+
+                    //执行前
+                    Action beforeExecute = () => {
+                        DateTime beforeExecuteTime = DateTime.Now;
+                        if (workItem.StartAt == null)
+                        {
+                            workItem.StartAt = beforeExecuteTime;
+                        }
+                        //非固定时间
+                        if (workItem.IsFixedTime)
+                        {
+                            workItem.LastRunTime = beforeExecuteTime;
+                            workItem.NextStart = workItem.GetNextStartTime(beforeExecuteTime);
+
+                        }
+                    };
+
+                    //执行后
+                    Action afterExecute = () => {
+
+                        DateTime executedTime = DateTime.Now;
+                        //非固定时间
+                        if(!workItem.IsFixedTime)
+                        {
+                            workItem.LastRunTime = executedTime;
+                            workItem.NextStart = workItem.GetNextStartTime(executedTime);
+
+                        }
+                    };
+
+                    //执行
+                    workItem.Run(tokenSrc, beforeExecute, afterExecute);
+                    //System.Diagnostics.Debug.WriteLine("下次执行时间："+workItem.NextStart.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    workItem.Save();
+
+                    //var ts = work.GetWaitSeconds();
+                    
+                    //if (ts.TotalMilliseconds > 0)
+                    //{
+                    //    if (!tokenSrc.IsCancellationRequested)
+                    //    {
+                    //        tokenSrc.Token.WaitHandle.WaitOne(ts);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    cancelTokenSource(tokenSrc);
+                    //    break;
+                    //}
+
+
                     //主线程停止，副线程也要停止
                     if (CancelTokenSource.IsCancellationRequested)
                     {

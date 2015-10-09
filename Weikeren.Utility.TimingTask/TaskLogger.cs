@@ -37,8 +37,8 @@ namespace Weikeren.Utility.TimingTask
             {
                 string basePath = AppDomain.CurrentDomain.BaseDirectory;
                 string relativePath = System.Configuration.ConfigurationManager.AppSettings["TaskXmlPath"];
-                string path = string.Format("{0}/{1}/Log", basePath.Trim('/'),
-                    relativePath.Trim('/').Trim('\\'));
+                string path = string.Format("{0}/{1}/Log/{2}", basePath.Trim('/'),
+                    relativePath.Trim('/').Trim('\\'), taskName);
 
                 if (!Directory.Exists(path))
                 {

@@ -51,8 +51,16 @@ namespace Weikeren.Utility.EF
             {
                 lock (_syncRoot)
                 {
-                    action.Invoke(this);
-                    scope.Complete();
+                    try
+                    {
+                        action.Invoke(this);
+                        scope.Complete();
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.Print(ex.Message);
+                        throw new Exception("事务执行发生异常。",ex);
+                    }
                 }
             }
         }

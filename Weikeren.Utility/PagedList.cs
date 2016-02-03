@@ -68,6 +68,16 @@ namespace Weikeren.Utility
             this.AddRange(list.Skip(pageIndex * pageSize).Take(pageSize).ToList());
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        public PagedList(IEnumerable<T> list)
+        {
+            this.AddRange(list);
+        }
         #endregion
 
         #region 属性

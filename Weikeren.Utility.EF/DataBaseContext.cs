@@ -12,11 +12,37 @@ using System.Transactions;
 
 namespace Weikeren.Utility.EF
 {
+
     /// <summary>
     /// EF的数据上下文
     /// </summary>
     public class DataBaseContext : DbContext,IDataBaseContext
     {
+        //private class LockObject
+        //{
+
+        //    private static readonly LockObject _instance = new LockObject();
+        //    /// <summary>
+        //    /// 构造函数
+        //    /// </summary>
+        //    private LockObject()
+        //    {
+        //        SyncRoot = new object();
+        //    }
+
+        //    /// <summary>
+        //    /// 
+        //    /// </summary>
+        //    public static LockObject Instance
+        //    {
+        //        get { return _instance; }
+        //    }
+
+        //    public readonly object SyncRoot;
+
+        //}
+
+
         /// <summary>
         /// 
         /// </summary>

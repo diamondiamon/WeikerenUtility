@@ -103,7 +103,42 @@ namespace Weikeren.Utility.EF
 
             return list[0];
         }
+
+        ///// <summary>
+        ///// 执行查询，返回单个对象
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="command"></param>
+        ///// <returns></returns>
+        //public SqlMapper.GridReader QueryMultiple(CommandDefinition command)
+        //{
+        //    return ExecuteAction(conn =>
+        //    {
+        //        return conn.QueryMultiple(command);
+        //    });
+
+        //}
+
+        ///// <summary>
+        ///// 执行查询，返回单个对象
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="sql"></param>
+        ///// <param name="param"></param>
+        ///// <param name="transaction"></param>
+        ///// <param name="buffered"></param>
+        ///// <param name="commandTimeout"></param>
+        ///// <param name="commandType"></param>
+        ///// <returns></returns>
+        //public SqlMapper.GridReader QueryMultiple(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        //{
+        //    return ExecuteAction(conn =>
+        //    {
+        //        return conn.QueryMultiple(sql, param, transaction, commandTimeout, commandType);
+        //    });
+        //}
         #endregion
+
 
         #region Execute
         
@@ -135,6 +170,8 @@ namespace Weikeren.Utility.EF
         }
 
         #endregion
+
+
 
         #region ExecuteScalar
         //
@@ -205,7 +242,9 @@ namespace Weikeren.Utility.EF
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("----------------------------ProcessInTrans执行发生异常----------------------");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
+                    System.Diagnostics.Debug.WriteLine("----------------------------ProcessInTrans执行发生异常----------------------");
                     if (tran != null)
                     {
                         tran.Rollback();
@@ -238,6 +277,10 @@ namespace Weikeren.Utility.EF
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("----------------------------ProcessInTrans执行发生异常----------------------");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    System.Diagnostics.Debug.WriteLine("----------------------------ProcessInTrans执行发生异常----------------------");
+
                     if (tran != null)
                     {
                         tran.Rollback();
@@ -268,7 +311,9 @@ namespace Weikeren.Utility.EF
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("发生错误了：" + ex.Message);
+                    System.Diagnostics.Debug.WriteLine("----------------------------SQLHelper执行发生异常----------------------");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    System.Diagnostics.Debug.WriteLine("----------------------------SQLHelper执行发生异常----------------------");
                     throw new Exception("数据库执行命令错误", ex);
                 }
 

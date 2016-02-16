@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Weikeren.Utility.Cache.MemcachedContainer;
+using Weikeren.Utility.RedisCache;
 using Weikeren.Utility.WebTest.DITest;
 
 namespace Weikeren.Utility.WebTest
@@ -27,19 +28,34 @@ namespace Weikeren.Utility.WebTest
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            loadMemcachedConfig();
+            loadCacheConfig();
 
 
             //开始定时任务
-            Weikeren.Utility.TimingTask.TaskManager.Instance.StartTask();
+            //Weikeren.Utility.TimingTask.TaskManager.Instance.StartTask();
+
+            //Weikeren.Utility.RedisCache.RedisManager.Instance.InitCompleted = (client) => {
+            //    System.Console.WriteLine("加载完成了。呵呵！");
+            //};
+            //Weikeren.Utility.RedisCache.RedisManager.Instance.Init("192.168.1.123", 6379, "test123456");
+
+            //RedisCachedConfig.SetConfig(new ServiceStack.Redis.RedisEndpoint() { Host = "192.168.1.123", Port = 6379, Password = "test123456" }, Server.MapPath("/redis.config"));
         }
 
         /// <summary>
         /// 加载缓存的配置文件
         /// </summary>
-        private void loadMemcachedConfig()
+        private void loadCacheConfig()
         {
             MemCachedConfig.LoadConfig(Server.MapPath("/memcached.config"));
+            RedisManager.Instance.Init(Server.MapPath("/redis.config"));
         }
+
+        protected void Application_End(object sender, EventArgs e)
+        {
+            Weikeren.Utility.RedisCache.RedisManager.Instance.Close();
+
+        }
+
     }
 }

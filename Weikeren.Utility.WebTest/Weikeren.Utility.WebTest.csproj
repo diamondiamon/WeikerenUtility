@@ -100,6 +100,22 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entities.EF6.6.8.3\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=4.0.52.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.4.0.52\lib\net40\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.52\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=4.0.52.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Redis.4.0.52\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.52.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.52\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -251,6 +267,7 @@
     <Compile Include="CacheTest\MemcacheHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DBController.cs" />
+    <Compile Include="Controllers\RedisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DB\Model\Student.cs" />
     <Compile Include="DB\Model\StudentMapping.cs" />
@@ -285,6 +302,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RedisCache\RedisCacheTester.cs" />
     <Compile Include="TimingTaskWork\Task1.cs" />
     <Compile Include="TimingTaskWork\TaskV2.cs" />
     <Compile Include="Web References\WkrLoggerService\Reference.cs">
@@ -437,6 +455,10 @@
     <ProjectReference Include="..\Weikeren.Utility.MDB\Weikeren.Utility.MDB.csproj">
       <Project>{5d29dbea-7114-4c06-ad8a-8711af1288b0}</Project>
       <Name>Weikeren.Utility.MDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weikeren.Utility.RedisCache\Weikeren.Utility.RedisCache.csproj">
+      <Project>{45c80e8a-772c-4b8e-b0fb-cdd1eba7d28f}</Project>
+      <Name>Weikeren.Utility.RedisCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weikeren.Utility.TimingTask\Weikeren.Utility.TimingTask.csproj">
       <Project>{9c917234-8b7d-4aca-8eea-4ca31fc85b1f}</Project>

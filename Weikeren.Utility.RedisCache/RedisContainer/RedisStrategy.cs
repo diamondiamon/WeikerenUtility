@@ -8,6 +8,9 @@ namespace Weikeren.Utility.RedisCache
     /// </summary>
     public class RedisStrategy : IRedisCacheStrategy
     {
+
+        private static readonly object _obj = new object();
+
         #region ICacheStrategy 成员
 
         /// <summary>
@@ -18,13 +21,17 @@ namespace Weikeren.Utility.RedisCache
         /// <param name="second">缓存时间(秒)</param>
         public void Add<T>(string key, T o, int second)
         {
-            if (second > 0)
+            lock (_obj)
             {
-                RedisManager.Instance.CacheClient.Set(key, o, DateTime.Now.AddSeconds(second));
-            }
-            else
-            {
-                RedisManager.Instance.CacheClient.Set(key, o);
+
+                if (second > 0)
+                {
+                    RedisManager.Instance.CacheClient.Set(key, o, DateTime.Now.AddSeconds(second));
+                }
+                else
+                {
+                    RedisManager.Instance.CacheClient.Set(key, o);
+                }
             }
         }
         
@@ -34,8 +41,11 @@ namespace Weikeren.Utility.RedisCache
         /// <param name="key"></param>
         public void Remove(string key)
         {
-            if (RedisManager.Instance.CacheClient.ContainsKey(key))
-                RedisManager.Instance.CacheClient.Remove(key);
+            lock (_obj)
+            {
+                if (RedisManager.Instance.CacheClient.ContainsKey(key))
+                    RedisManager.Instance.CacheClient.Remove(key);
+            }
         }
         
         /// <summary>
@@ -43,17 +53,23 @@ namespace Weikeren.Utility.RedisCache
         /// </summary>
         public void RemoveAll()
         {
-            RedisManager.Instance.CacheClient.FlushAll();
+            lock (_obj)
+            {
+                RedisManager.Instance.CacheClient.FlushAll();
+            }
         }
 
         /// <summary>
         /// 获得缓存数据
         /// </summary>
-        /// <param name="objId"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
         public object Get(string key)
         {
-            return RedisManager.Instance.CacheClient.Get(key);
+            lock (_obj)
+            {
+                return RedisManager.Instance.CacheClient.Get(key);
+            }
         }
         /// <summary>
         /// 获得缓存数据
@@ -63,17 +79,23 @@ namespace Weikeren.Utility.RedisCache
         /// <returns></returns>
         public T Get<T>(string key)
         {
-            return RedisManager.Instance.CacheClient.Get<T>(key);
+            lock (_obj)
+            {
+                return RedisManager.Instance.CacheClient.Get<T>(key);
+            }
         }
 
         /// <summary>
         /// 判断此缓存是否有效
         /// </summary>
-        /// <param name="objID"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
         public bool isExists(string key)
         {
-            return RedisManager.Instance.CacheClient.ContainsKey(key);
+            lock (_obj)
+            {
+                return RedisManager.Instance.CacheClient.ContainsKey(key);
+            }
         }
         #endregion
     }

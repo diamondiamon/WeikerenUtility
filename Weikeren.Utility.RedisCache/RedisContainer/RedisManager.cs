@@ -79,7 +79,6 @@ namespace Weikeren.Utility.RedisCache
         //}
 
 
-
         /// <summary>
         /// 客户端缓存操作对象
         /// </summary>

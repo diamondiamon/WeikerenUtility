@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Weikeren.Utility.Cache.MemcachedContainer;
 using Weikeren.Utility.RedisCache;
+//using Weikeren.Utility.RedisCache;
 using Weikeren.Utility.WebTest.DITest;
 
 namespace Weikeren.Utility.WebTest

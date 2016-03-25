@@ -10,7 +10,8 @@ namespace Weikeren.Utility.RedisCache
     /// </summary>
     public sealed class RedisManager
     {
-        private RedisClient _client = null;
+        //private RedisClient _client = null;
+        private PooledRedisClientManager _prcm;
         //private RedisEndpoint config = null;
         //public Action<RedisClient> InitCompleted;
 
@@ -41,7 +42,16 @@ namespace Weikeren.Utility.RedisCache
             try
             {
                 var config = (RedisEndpoint)SerializationHelper.Load(typeof(RedisEndpoint), configfilepath);
-                _client = new RedisClient(config);
+
+                _prcm = new PooledRedisClientManager(config.ReadServerList, config.WriteServerList,
+                                 new RedisClientManagerConfig
+                                 {
+                                     MaxWritePoolSize = config.MaxWritePoolSize,
+                                     MaxReadPoolSize = config.MaxReadPoolSize,
+                                     AutoStart = config.AutoStart,
+                                     DefaultDb = config.Db 
+                                 });
+
                 System.Console.WriteLine("－－－－－－－－－－－－－－－Redis初始化成功－－－－－－－－－－－－－－－");
             }
             catch (Exception ex)
@@ -51,6 +61,7 @@ namespace Weikeren.Utility.RedisCache
                 throw ex;
             }
         }
+
 
         ///// <summary>
         ///// 初始化
@@ -82,12 +93,9 @@ namespace Weikeren.Utility.RedisCache
         /// <summary>
         /// 客户端缓存操作对象
         /// </summary>
-        public RedisClient CacheClient
+        public IRedisClient GetClient()
         {
-            get
-            {
-                return _client;
-            }
+            return _prcm.GetClient();
         }
 
         /// <summary>
@@ -95,11 +103,11 @@ namespace Weikeren.Utility.RedisCache
         /// </summary>
         public void Close()
         {
-            if (_client != null)
+            if (_prcm != null)
             {
                 //_client.Shutdown();
-                _client.Dispose();
-                _client = null;
+                _prcm.Dispose();
+                _prcm = null;
             }
         }
 

@@ -92,6 +92,7 @@ namespace Weikeren.Utility.MDB
                     var fields = Builders<PrimaryKeyInfo>.Update.Set(c => c.CurrentIndex, currentIndex);
                     collection.UpdateOneAsync(filter, fields).GetAwaiter().GetResult();
 
+                    //Debug.WriteLine("当前：" + currentIndex);
                     return currentIndex;
                 }
             }

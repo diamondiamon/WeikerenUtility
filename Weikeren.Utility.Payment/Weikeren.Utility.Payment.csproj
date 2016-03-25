@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="com.yeepay.icc">
-      <HintPath>..\packages\Yeepay\com.yeepay.icc.dll</HintPath>
+      <HintPath>..\libs\Pay\com.yeepay.icc.dll</HintPath>
     </Reference>
     <Reference Include="com.yeepay.utils">
-      <HintPath>..\packages\Yeepay\com.yeepay.utils.dll</HintPath>
+      <HintPath>..\libs\Pay\com.yeepay.utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

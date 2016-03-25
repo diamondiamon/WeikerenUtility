@@ -23,14 +23,16 @@ namespace Weikeren.Utility.RedisCache
         {
             lock (_obj)
             {
-
-                if (second > 0)
+                using (var client = RedisManager.Instance.GetClient())
                 {
-                    RedisManager.Instance.CacheClient.Set(key, o, DateTime.Now.AddSeconds(second));
-                }
-                else
-                {
-                    RedisManager.Instance.CacheClient.Set(key, o);
+                    if (second > 0)
+                    {
+                        client.Set(key, o, DateTime.Now.AddSeconds(second));
+                    }
+                    else
+                    {
+                        client.Set(key, o);
+                    }
                 }
             }
         }
@@ -43,8 +45,11 @@ namespace Weikeren.Utility.RedisCache
         {
             lock (_obj)
             {
-                if (RedisManager.Instance.CacheClient.ContainsKey(key))
-                    RedisManager.Instance.CacheClient.Remove(key);
+                using (var client = RedisManager.Instance.GetClient())
+                {
+                    if (client.ContainsKey(key))
+                        client.Remove(key);
+                }
             }
         }
         
@@ -55,22 +60,25 @@ namespace Weikeren.Utility.RedisCache
         {
             lock (_obj)
             {
-                RedisManager.Instance.CacheClient.FlushAll();
+                using (var client = RedisManager.Instance.GetClient())
+                {
+                    client.FlushAll();
+                }
             }
         }
 
-        /// <summary>
-        /// 获得缓存数据
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public object Get(string key)
-        {
-            lock (_obj)
-            {
-                return RedisManager.Instance.CacheClient.Get(key);
-            }
-        }
+        ///// <summary>
+        ///// 获得缓存数据
+        ///// </summary>
+        ///// <param name="key"></param>
+        ///// <returns></returns>
+        //public object Get(string key)
+        //{
+        //    lock (_obj)
+        //    {
+        //        return RedisManager.Instance.CacheClient.Get(key);
+        //    }
+        //}
         /// <summary>
         /// 获得缓存数据
         /// </summary>
@@ -81,7 +89,10 @@ namespace Weikeren.Utility.RedisCache
         {
             lock (_obj)
             {
-                return RedisManager.Instance.CacheClient.Get<T>(key);
+                using (var client = RedisManager.Instance.GetClient())
+                {
+                    return client.Get<T>(key);
+                }
             }
         }
 
@@ -94,7 +105,10 @@ namespace Weikeren.Utility.RedisCache
         {
             lock (_obj)
             {
-                return RedisManager.Instance.CacheClient.ContainsKey(key);
+                using (var client = RedisManager.Instance.GetClient())
+                {
+                    return client.ContainsKey(key);
+                }
             }
         }
         #endregion

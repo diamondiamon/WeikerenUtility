@@ -29,6 +29,14 @@ namespace Weikeren.Utility.WebTest.Controllers
             return Content("添加成功");
         }
 
+        public ActionResult AddMore()
+        {
+            RedisCacheTester test = new RedisCacheTester();
+            test.AddMore();
+
+            return Content("添加成功");
+        }
+
         public ActionResult Delete()
         {
             RedisCacheTester test = new RedisCacheTester();
@@ -46,7 +54,7 @@ namespace Weikeren.Utility.WebTest.Controllers
         }
         public ActionResult Close()
         {
-            Weikeren.Utility.RedisCache.RedisManager.Instance.Close();
+            //Weikeren.Utility.RedisCache.RedisManager.Instance.Close();
 
             return Content("关闭成功");
         }

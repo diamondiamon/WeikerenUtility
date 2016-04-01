@@ -49,7 +49,7 @@ namespace Weikeren.Utility.RedisCache
                                      MaxWritePoolSize = config.MaxWritePoolSize,
                                      MaxReadPoolSize = config.MaxReadPoolSize,
                                      AutoStart = config.AutoStart,
-                                     DefaultDb = config.Db 
+                                     DefaultDb = config.Db
                                  });
 
                 System.Console.WriteLine("－－－－－－－－－－－－－－－Redis初始化成功－－－－－－－－－－－－－－－");
